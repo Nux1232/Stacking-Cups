@@ -1,12 +1,16 @@
 #BlueJ class context
 comment0.target=Cup
-comment0.text=\r\n\ A\ cup\ that\ moves.\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras,\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 1.0\r\n
+comment0.text=\r\n\ Representa\ una\ taza\ (Cup)\ dentro\ de\ la\ simulaci\u00F3n.\r\n\ <p>\r\n\ Esta\ clase\ encapsula\ la\ l\u00F3gica\ visual\ y\ dimensional\ de\ una\ taza\ individual.\r\n\ Cumple\ con\ el\ Requisito\ de\ Construcci\u00F3n\ al\ utilizar\ la\ composici\u00F3n,\r\n\ delegando\ la\ representaci\u00F3n\ gr\u00E1fica\ a\ la\ clase\ {@link\ Rectangle}\ del\ paquete\ shapes.\r\n\ </p>\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras\r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 1.0\r\n
 comment1.params=size\ color\ x\ y
 comment1.target=Cup(int,\ java.lang.String,\ int,\ int)
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ Cup.\r\n\ Crea\ una\ nueva\ taza\ con\ un\ tama\u00F1o,\ color\ y\ posici\u00F3n\ espec\u00EDficos.\r\n\ Calcula\ las\ dimensiones\ en\ p\u00EDxeles\ bas\u00E1ndose\ en\ el\ tama\u00F1o\ l\u00F3gico\ y\ mueve\r\n\ la\ figura\ a\ la\ posici\u00F3n\ calculada\ por\ la\ Torre.\r\n\r\n\ @param\ size\ \ El\ tama\u00F1o\ num\u00E9rico\ de\ la\ taza\ (ej.\ 1,\ 2,\ 3...).\r\n\ @param\ color\ El\ color\ visual\ de\ la\ taza\ (ej.\ "red",\ "blue").\r\n\ @param\ x\ \ \ \ \ La\ coordenada\ X\ deseada\ en\ el\ canvas.\r\n\ @param\ y\ \ \ \ \ La\ coordenada\ Y\ deseada\ en\ el\ canvas.\r\n
 comment2.params=
 comment2.target=Rectangle\ getView()
+comment2.text=\r\n\ Obtiene\ la\ vista\ gr\u00E1fica\ de\ la\ taza.\r\n\ Este\ m\u00E9todo\ permite\ a\ la\ clase\ controladora\ (Tower)\ gestionar\ la\ visibilidad.\r\n\r\n\ @return\ El\ objeto\ Rectangle\ que\ representa\ visualmente\ a\ esta\ taza.\r\n
 comment3.params=
 comment3.target=int\ getSize()
+comment3.text=\r\n\ Obtiene\ el\ tama\u00F1o\ num\u00E9rico\ de\ la\ taza.\r\n\r\n\ @return\ El\ tama\u00F1o\ de\ la\ taza\ (entero).\r\n
 comment4.params=
 comment4.target=int\ getHeight()
+comment4.text=\r\n\ Obtiene\ la\ altura\ l\u00F3gica\ de\ la\ taza\ en\ cent\u00EDmetros.\r\n\ Seg\u00FAn\ las\ reglas\ del\ negocio,\ la\ altura\ en\ cm\ es\ equivalente\ al\ tama\u00F1o.\r\n\r\n\ @return\ La\ altura\ en\ cm.\r\n
 numComments=5

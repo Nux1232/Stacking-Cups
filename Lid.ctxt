@@ -1,10 +1,13 @@
 #BlueJ class context
 comment0.target=Lid
-comment0.text=\r\n\ A\ lid\ that\ moves.\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras,\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 1.0\r\n
+comment0.text=\r\n\ Representa\ una\ tapa\ (Lid)\ que\ se\ coloca\ sobre\ las\ tazas\ en\ la\ simulaci\u00F3n.\r\n\ <p>\r\n\ Esta\ clase\ encapsula\ la\ l\u00F3gica\ visual\ de\ la\ tapa.\ Cumple\ con\ el\ Requisito\ Funcional\r\n\ de\ tener\ una\ altura\ fija\ de\ 1\ cm\ y\ con\ el\ Requisito\ de\ Construcci\u00F3n\ al\ reutilizar\r\n\ la\ clase\ {@link\ Rectangle}\ del\ paquete\ shapes\ mediante\ composici\u00F3n.\r\n\ </p>\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras\r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 1.0\r\n
 comment1.params=size\ color\ x\ y
 comment1.target=Lid(int,\ java.lang.String,\ int,\ int)
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ Lid.\r\n\ Crea\ una\ tapa\ visualmente\ distinguible.\r\n\ <p>\r\n\ Implementa\ la\ l\u00F3gica\ de\ dimensiones\:\r\n\ 1.\ La\ altura\ se\ fija\ en\ 10\ p\u00EDxeles\ (equivalente\ a\ 1\ cm\ seg\u00FAn\ el\ requisito).\r\n\ 2.\ El\ ancho\ se\ calcula\ para\ ser\ ligeramente\ mayor\ que\ la\ taza,\ mejorando\ la\ representaci\u00F3n\ visual.\r\n\ </p>\r\n\r\n\ @param\ size\ \ El\ tama\u00F1o\ num\u00E9rico\ de\ la\ tapa.\r\n\ @param\ color\ El\ color\ de\ la\ tapa\ (debe\ coincidir\ con\ el\ de\ la\ taza).\r\n\ @param\ x\ \ \ \ \ La\ coordenada\ X\ deseada\ en\ el\ canvas.\r\n\ @param\ y\ \ \ \ \ La\ coordenada\ Y\ deseada\ en\ el\ canvas.\r\n
 comment2.params=
 comment2.target=Rectangle\ getView()
+comment2.text=\r\n\ Obtiene\ la\ vista\ gr\u00E1fica\ de\ la\ tapa.\r\n\ Permite\ a\ la\ clase\ Tower\ gestionar\ la\ visibilidad\ de\ este\ objeto.\r\n\r\n\ @return\ El\ objeto\ Rectangle\ que\ representa\ visualmente\ a\ esta\ tapa.\r\n
 comment3.params=
 comment3.target=int\ getSize()
+comment3.text=\r\n\ Obtiene\ el\ tama\u00F1o\ num\u00E9rico\ de\ la\ tapa.\r\n\r\n\ @return\ El\ tama\u00F1o\ de\ la\ tapa.\r\n
 numComments=4
