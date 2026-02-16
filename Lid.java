@@ -1,0 +1,90 @@
+
+import javax.swing.*;
+
+/**
+ * A lid that moves.
+ *
+ * @author Juan Pablo Cuervo Contreras, David Felipe Ortiz Salcedo
+ * @version 1.0
+ */
+public class Lid {
+    private static final int height = 1;
+    private int width;
+    private int numberSize;
+    private String color;
+    private int xPosition;
+    private int yPosition;
+    private boolean isVisible;
+    
+    public Lid(int width, int size, String color, int xPosition, int yPosition)  {
+        this.width = width;
+        this.numberSize = size;
+        this.color = color;
+        this.xPosition = 0;
+        this.yPosition = 0;
+        isVisible = false;
+    }
+    
+    /**
+     * Changes the size of the lid.
+     */
+    public void changeSize() {
+        erase();
+    }
+    
+    /**
+     * Changes the color of the lid.
+     */
+    public void changeColor(String newColor) {
+        color = newColor;
+        draw();
+    }
+    
+    /**
+     * Moves the lid left or right.
+     * @param Moves the item according to the number.
+     */
+    public void moveHorizontal(int distance) {
+        
+    }
+    
+    /**
+     * Moves the lid up or down.
+     * @param Moves the item according to the number.
+     */
+    public void moveVertical(int distance) {
+        
+    }
+    
+    /**
+     * Makes visible the lid. If it was visible does nothing.
+     */
+    public void makeVisible() {
+        erase();
+        isVisible = true;
+    }
+    
+    /*
+     * Draw the lid with current specifications on screen.
+     */
+
+    private void draw() {
+        if(isVisible) {
+            Canvas canvas = Canvas.getCanvas();
+            canvas.draw(this, color,
+                new java.awt.Rectangle(height, width));
+            canvas.wait(10);
+        }
+    }
+    
+    /*
+     * Erase the lid on screen.
+     */
+    private void erase(){
+        if(isVisible) {
+            Canvas canvas = Canvas.getCanvas();
+            canvas.erase(this);
+        }
+    }
+
+}

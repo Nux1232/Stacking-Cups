@@ -1,0 +1,92 @@
+
+/**
+ * A cup that moves.
+ *
+ * @author Juan Pablo Cuervo Contreras, David Felipe Ortiz Salcedo
+ * @version 1.0
+ */
+public class Cup {
+    private int height;
+    private int width;
+    private int numberSize;
+    private boolean covered;
+    private String color;
+    private boolean isVisible;
+    private int xPosition;
+    private int yPosition;
+    
+    public Cup(int height, int width, int size, String color, int xPosition, int yPosition) {
+        this.height = height;
+        this.width = width;
+        this.numberSize = size;
+        covered = false;
+        this.color = color;
+        this.xPosition = 0;
+        this.yPosition = 0;
+        isVisible = false;
+    }
+    
+    /**
+     * Changes the size of the cup.
+     * @param Width and height.
+     */
+    public void changeSize(int width, int height) {
+        
+    }
+    
+    /**
+     * Changes the color of the cup (must be the same as the lid).
+     * @param A new color for the cup.
+     */
+    public void changeColor(String newColor) {
+        color = newColor;
+        draw();
+    }
+    
+    /**
+     * Moves the cup left or right.
+     * @param Moves the item according to the number.
+     */
+    public void moveHorizontal(int distance) {
+        
+    }
+    
+    /**
+     * Moves the cup up or down.
+     * @param Moves the item according to the number.
+     */
+    public void moveVertical(int distance) {
+        
+    }
+    
+    /**
+     * Makes the cup visible. If it was visible does nothing.
+     */
+    public void makeVisible() {
+        erase();
+        isVisible = true;
+    }
+    
+    /*
+     * Draw the lid with current specifications on screen.
+     */
+
+    private void draw() {
+        if(isVisible) {
+            Canvas canvas = Canvas.getCanvas();
+            canvas.draw(this, color,
+                new java.awt.Rectangle(height, width));
+            canvas.wait(10);
+        }
+    }
+    
+    /*
+     * Erase the lid on screen.
+     */
+    private void erase(){
+        if(isVisible) {
+            Canvas canvas = Canvas.getCanvas();
+            canvas.erase(this);
+        }
+    }
+}
