@@ -8,83 +8,30 @@ import javax.swing.*;
  * @version 1.0
  */
 public class Lid {
-    private static final int height = 1;
-    private int width;
-    private int numberSize;
-    private String color;
-    private int xPosition;
-    private int yPosition;
-    private boolean isVisible;
-    
-    public Lid(int width, int size, String color, int xPosition, int yPosition)  {
-        this.width = width;
-        this.numberSize = size;
-        this.color = color;
-        this.xPosition = 0;
-        this.yPosition = 0;
-        isVisible = false;
-    }
-    
-    /**
-     * Changes the size of the lid.
-     */
-    public void changeSize() {
-        erase();
-    }
-    
-    /**
-     * Changes the color of the lid.
-     */
-    public void changeColor(String newColor) {
-        color = newColor;
-        draw();
-    }
-    
-    /**
-     * Moves the lid left or right.
-     * @param Moves the item according to the number.
-     */
-    public void moveHorizontal(int distance) {
-        
-    }
-    
-    /**
-     * Moves the lid up or down.
-     * @param Moves the item according to the number.
-     */
-    public void moveVertical(int distance) {
-        
-    }
-    
-    /**
-     * Makes visible the lid. If it was visible does nothing.
-     */
-    public void makeVisible() {
-        erase();
-        isVisible = true;
-    }
-    
-    /*
-     * Draw the lid with current specifications on screen.
-     */
+    private int size;
+    private Rectangle view;
 
-    private void draw() {
-        if(isVisible) {
-            Canvas canvas = Canvas.getCanvas();
-            canvas.draw(this, color,
-                new java.awt.Rectangle(height, width));
-            canvas.wait(10);
-        }
+    public Lid(int size, String color, int x, int y) {
+        this.size = size;
+        
+        // La tapa es un poco más ancha que la taza para que parezca una tapa
+        int widthPx = (size * 20) + 4; 
+        int heightPx = 10; // 1 cm = 10 px
+        
+        view = new Rectangle();
+        view.changeSize(heightPx, widthPx);
+        view.changeColor(color);
+        
+        // Ajuste de posición (centrar respecto a la taza que es más angosta)
+        view.moveHorizontal((x - 2) - 70); // -2 para centrar el ancho extra
+        view.moveVertical(y - 15);
     }
     
-    /*
-     * Erase the lid on screen.
-     */
-    private void erase(){
-        if(isVisible) {
-            Canvas canvas = Canvas.getCanvas();
-            canvas.erase(this);
-        }
+    public Rectangle getView() {
+        return view;
     }
 
+    public int getSize() {
+        return size;
+    }
 }
