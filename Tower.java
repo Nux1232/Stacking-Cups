@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Juan Pablo Cuervo Contreras
  * @author David Felipe Ortiz Salcedo
- * @version 1.0
+ * @version 2.0
  */
 public class Tower {
     // Dimensiones
@@ -44,7 +44,7 @@ public class Tower {
         this.isVisible = false;
         this.lastOperationOk = true;
         drawRuler(); // Requisito Usabilidad 4: Marcar centímetros
-    }
+    } // Cierre del constructor
 
     /**
      * Adiciona una taza a la torre.
@@ -82,7 +82,7 @@ public class Tower {
         
         items.add(newCup);
         lastOperationOk = true;
-    }
+    } // Cierre del método
 
     /**
      * Adiciona una tapa a la torre.
@@ -117,7 +117,7 @@ public class Tower {
 
         items.add(newLid);
         lastOperationOk = true;
-    }
+    } // Cierre del método
 
     /**
      * Consulta la altura actual de los elementos apilados.
@@ -127,7 +127,7 @@ public class Tower {
      */
     public int height() {
         return currentHeight();
-    }
+    } // Cierre del método
 
     /**
      * Hace visible el simulador.
@@ -141,7 +141,7 @@ public class Tower {
             if (item instanceof Cup) ((Cup)item).getView().makeVisible();
             if (item instanceof Lid) ((Lid)item).getView().makeVisible();
         }
-    }
+    } // Cierre del método
 
     /**
      * Hace invisible el simulador.
@@ -155,7 +155,7 @@ public class Tower {
             if (item instanceof Cup) ((Cup)item).getView().makeInvisible();
             if (item instanceof Lid) ((Lid)item).getView().makeInvisible();
         }
-    }
+    } // Cierre del método
 
     /**
      * Indica si la última operación realizada fue exitosa.
@@ -164,103 +164,8 @@ public class Tower {
      */
     public boolean ok() {
         return lastOperationOk;
-    }
+    } // Cierre del método
 
-    // --- MÉTODOS PRIVADOS (Auxiliares) ---
-
-    /**
-     * Calcula la coordenada Y en píxeles para posicionar el siguiente elemento.
-     * Se basa en un apilamiento invertido (Y=0 es arriba).
-     *
-     * @param itemHeightCm La altura del elemento a adicionar en cm.
-     * @return La coordenada Y calculada.
-     */
-    private int calculateNextY(int itemHeightCm) {
-        int currentHeightPx = currentHeight() * PIXELS_PER_CM;
-        int itemHeightPx = itemHeightCm * PIXELS_PER_CM;
-        return GROUND_Y - currentHeightPx - itemHeightPx;
-    }
-
-    /**
-     * Calcula la altura lógica total acumulada de la torre.
-     *
-     * @return La suma de alturas de tazas y tapas.
-     */
-    private int currentHeight() {
-        int h = 0;
-        for (Object item : items) {
-            if (item instanceof Cup) h += ((Cup)item).getHeight(); // Altura lógica
-            else if (item instanceof Lid) h += 1; // Tapa siempre 1
-        }
-        return h;
-    }
-
-    /**
-     * Verifica si ya existe una taza con el tamaño dado en la colección.
-     *
-     * @param size El tamaño de la taza a verificar.
-     * @return true si la taza ya existe, false en caso contrario.
-     */
-    private boolean existsCup(int size) {
-        for (Object item : items) {
-            if (item instanceof Cup && ((Cup)item).getSize() == size) return true;
-        }
-        return false;
-    }
-
-    /**
-     * Verifica si ya existe una tapa con el tamaño dado en la colección.
-     *
-     * @param size El tamaño de la tapa a verificar.
-     * @return true si la tapa ya existe, false en caso contrario.
-     */
-    private boolean existsLid(int size) {
-        for (Object item : items) {
-            if (item instanceof Lid && ((Lid)item).getSize() == size) return true;
-        }
-        return false;
-    }
-
-    /**
-     * Obtiene un color consistente basado en el tamaño del elemento.
-     *
-     * @param size El tamaño del elemento.
-     * @return El nombre del color asignado.
-     */
-    private String getColorForSize(int size) {
-        String[] colors = {"red", "blue", "green", "magenta", "black", "yellow"};
-        return colors[size % colors.length];
-    }
-
-    /**
-     * Muestra un mensaje de error utilizando JOptionPane, solo si el simulador es visible.
-     *
-     * @param msg El mensaje de error a mostrar.
-     */
-    private void showError(String msg) {
-        if (isVisible) JOptionPane.showMessageDialog(null, msg);
-    }
-
-    /**
-     * Dibuja una regla visual que marca la altura máxima permitida.
-     * Solo se dibuja si el simulador es visible.
-     */
-    private void drawRuler() {
-        if (!isVisible) return;
-        // Dibuja una línea vertical simple usando Rectangle
-        Rectangle axis = new Rectangle();
-        axis.changeColor("black");
-        axis.changeSize(maxHeight * PIXELS_PER_CM, 2); // Alto, Ancho
-        // Mover a posición (Un poco a la izquierda del centro)
-        int rulerX = CENTER_X - 60; 
-        int moveX = rulerX - 70; // 70 es default X de Rectangle
-        int moveY = (GROUND_Y - (maxHeight * PIXELS_PER_CM)) - 15; // 15 es default Y
-        
-        axis.moveHorizontal(moveX);
-        axis.moveVertical(moveY);
-        axis.makeVisible();
-    }
-    
     /**
      * Crea una torre especificando la cantidad de tazas.
      * Genera tazas con tamaños siguiendo la fórmula 2i - 1.
@@ -280,7 +185,7 @@ public class Tower {
             int size = (2 * i) - 1; 
             pushCup(size);
         }
-    }
+    } // Cierre del método
 
     /**
      * Intercambia la posición de dos elementos en la torre.
@@ -304,38 +209,7 @@ public class Tower {
             showError("Uno o ambos objetos no existen en la torre.");
             lastOperationOk = false;
         }
-    }
-
-    /**
-     * Tapa las tazas que tienen sus respectivas tapas dentro de la torre.
-     * Requisito 12: Permitir tapar las tazas.
-     */
-    public void cover() {
-        for (Object item : items) {
-            if (item instanceof Cup) {
-                Cup cup = (Cup) item;
-                if (existsLid(cup.getSize())) {
-                    cup.setCoveredStatus(true);
-                }
-            }
-        }
-        lastOperationOk = true;
-    }
-
-    /**
-     * Método auxiliar privado para encontrar el índice de un objeto.
-     */
-    private int findItemIndex(String type, int size) {
-        for (int i = 0; i < items.size(); i++) {
-            Object item = items.get(i);
-            if (type.equalsIgnoreCase("cup") && item instanceof Cup && ((Cup)item).getSize() == size) {
-                return i;
-            } else if (type.equalsIgnoreCase("lid") && item instanceof Lid && ((Lid)item).getSize() == size) {
-                return i;
-            }
-        }
-        return -1;
-    }
+    } // Cierre del método
     
     /**
      * Consulta un movimiento de intercambio que reduzca la altura de la torre.
@@ -377,8 +251,134 @@ public class Tower {
         // Si se probaron todas las combinaciones y ninguna redujo la altura
         lastOperationOk = false;
         return null;
-    }
+    } // Cierre del método
 
+    /**
+     * Tapa las tazas que tienen sus respectivas tapas dentro de la torre.
+     * Requisito 12: Permitir tapar las tazas.
+     */
+    public void cover() {
+        for (Object item : items) {
+            if (item instanceof Cup) {
+                Cup cup = (Cup) item;
+                if (existsLid(cup.getSize())) {
+                    cup.setCoveredStatus(true);
+                }
+            }
+        }
+        lastOperationOk = true;
+    } // Cierre del método
+    
+    // --- MÉTODOS PRIVADOS (Auxiliares) ---
+
+    /**
+     * Calcula la coordenada Y en píxeles para posicionar el siguiente elemento.
+     * Se basa en un apilamiento invertido (Y=0 es arriba).
+     *
+     * @param itemHeightCm La altura del elemento a adicionar en cm.
+     * @return La coordenada Y calculada.
+     */
+    private int calculateNextY(int itemHeightCm) {
+        int currentHeightPx = currentHeight() * PIXELS_PER_CM;
+        int itemHeightPx = itemHeightCm * PIXELS_PER_CM;
+        return GROUND_Y - currentHeightPx - itemHeightPx;
+    } // Cierre del método
+
+    /**
+     * Calcula la altura lógica total acumulada de la torre.
+     *
+     * @return La suma de alturas de tazas y tapas.
+     */
+    private int currentHeight() {
+        int h = 0;
+        for (Object item : items) {
+            if (item instanceof Cup) h += ((Cup)item).getHeight(); // Altura lógica
+            else if (item instanceof Lid) h += 1; // Tapa siempre 1
+        }
+        return h;
+    } // Cierre del método
+
+    /**
+     * Verifica si ya existe una taza con el tamaño dado en la colección.
+     *
+     * @param size El tamaño de la taza a verificar.
+     * @return true si la taza ya existe, false en caso contrario.
+     */
+    private boolean existsCup(int size) {
+        for (Object item : items) {
+            if (item instanceof Cup && ((Cup)item).getSize() == size) return true;
+        }
+        return false;
+    } // Cierre del método
+
+    /**
+     * Verifica si ya existe una tapa con el tamaño dado en la colección.
+     *
+     * @param size El tamaño de la tapa a verificar.
+     * @return true si la tapa ya existe, false en caso contrario.
+     */
+    private boolean existsLid(int size) {
+        for (Object item : items) {
+            if (item instanceof Lid && ((Lid)item).getSize() == size) return true;
+        }
+        return false;
+    } // Cierre del método
+
+    /**
+     * Obtiene un color consistente basado en el tamaño del elemento.
+     *
+     * @param size El tamaño del elemento.
+     * @return El nombre del color asignado.
+     */
+    private String getColorForSize(int size) {
+        String[] colors = {"red", "blue", "green", "magenta", "black", "yellow"};
+        return colors[size % colors.length];
+    } // Cierre del método
+
+    /**
+     * Muestra un mensaje de error utilizando JOptionPane, solo si el simulador es visible.
+     *
+     * @param msg El mensaje de error a mostrar.
+     */
+    private void showError(String msg) {
+        if (isVisible) JOptionPane.showMessageDialog(null, msg);
+    } // Cierre del método
+
+    /**
+     * Dibuja una regla visual que marca la altura máxima permitida.
+     * Solo se dibuja si el simulador es visible.
+     */
+    private void drawRuler() {
+        if (!isVisible) return;
+        // Dibuja una línea vertical simple usando Rectangle
+        Rectangle axis = new Rectangle();
+        axis.changeColor("black");
+        axis.changeSize(maxHeight * PIXELS_PER_CM, 2); // Alto, Ancho
+        // Mover a posición (Un poco a la izquierda del centro)
+        int rulerX = CENTER_X - 60; 
+        int moveX = rulerX - 70; // 70 es default X de Rectangle
+        int moveY = (GROUND_Y - (maxHeight * PIXELS_PER_CM)) - 15; // 15 es default Y
+        
+        axis.moveHorizontal(moveX);
+        axis.moveVertical(moveY);
+        axis.makeVisible();
+    } // Cierre del método
+    
+    /**
+     * Método auxiliar privado para encontrar el índice de un objeto.
+     */
+    private int findItemIndex(String type, int size) {
+        for (int i = 0; i < items.size(); i++) {
+            Object item = items.get(i);
+            if (type.equalsIgnoreCase("cup") && item instanceof Cup && ((Cup)item).getSize() == size) {
+                return i;
+            } else if (type.equalsIgnoreCase("lid") && item instanceof Lid && ((Lid)item).getSize() == size) {
+                return i;
+            }
+        }
+        return -1;
+    } // Cierre del método
+    
     /**
      * Método auxiliar privado para obtener la representación String[] de un objeto,
      * requerida por el formato de salida de swapToReduce.
@@ -393,5 +393,5 @@ public class Tower {
             return new String[] {"lid", String.valueOf(((Lid)item).getSize())};
         }
         return new String[] {"", ""}; // Caso por defecto de seguridad
-    }
-}
+    } // Cierre del método
+} // Cierre de la clase

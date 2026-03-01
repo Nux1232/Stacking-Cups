@@ -47,7 +47,7 @@ public class Cup {
         // necesario para llevarlo a la posición (x, y) solicitada.
         view.moveHorizontal(x - 70);
         view.moveVertical(y - 15);
-    }
+    } // Cierre del constructor
     
     /**
      * Obtiene la vista gráfica de la taza.
@@ -57,7 +57,7 @@ public class Cup {
      */
     public Rectangle getView() {
         return view;
-    }
+    } // Cierre del método
 
     /**
      * Obtiene el tamaño numérico de la taza.
@@ -66,7 +66,7 @@ public class Cup {
      */
     public int getSize() {
         return size;
-    }
+    } // Cierre del método
     
     /**
      * Obtiene la altura lógica de la taza en centímetros.
@@ -76,7 +76,7 @@ public class Cup {
      */
     public int getHeight() {
         return size; // Altura en cm
-    }
+    } // Cierre del método
     
     /**
      * Cambia la apariencia de la taza para indicar que está tapada.
@@ -90,5 +90,5 @@ public class Cup {
             // te sugiero agregar 'private String originalColor;' en el constructor.
             // view.changeColor(originalColor); 
         }
-    }
-}
+    } // Cierre del método
+} //Cierre de la clase
