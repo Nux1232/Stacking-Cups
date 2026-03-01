@@ -336,4 +336,62 @@ public class Tower {
         }
         return -1;
     }
+    
+    /**
+     * Consulta un movimiento de intercambio que reduzca la altura de la torre.
+     * Requisito 13: Consultar un movimiento que reduzca la altura.
+     *
+     * @return Arreglo 2D con los identificadores de los objetos a intercambiar,
+     * ej: {{"cup", "4"}, {"lid", "4"}}. Retorna null si no hay ninguno.
+     */
+    public String[][] swapToReduce() {
+        int initialHeight = height();
+
+        // Iteramos sobre todos los pares posibles en la torre
+        for (int i = 0; i < items.size(); i++) {
+            for (int j = i + 1; j < items.size(); j++) {
+                
+                // 1. Simular el intercambio en la lista
+                Object temp = items.get(i);
+                items.set(i, items.get(j));
+                items.set(j, temp);
+
+                // 2. Comprobar la nueva altura de la torre simulada
+                int newHeight = height();
+
+                // 3. Revertir el intercambio inmediatamente (¡muy importante para no alterar el estado real!)
+                items.set(j, items.get(i));
+                items.set(i, temp);
+
+                // 4. Evaluar si logramos reducir la altura
+                if (newHeight < initialHeight) {
+                    lastOperationOk = true;
+                    return new String[][] { 
+                        identifyItem(items.get(i)), 
+                        identifyItem(items.get(j)) 
+                    };
+                }
+            }
+        }
+        
+        // Si se probaron todas las combinaciones y ninguna redujo la altura
+        lastOperationOk = false;
+        return null;
+    }
+
+    /**
+     * Método auxiliar privado para obtener la representación String[] de un objeto,
+     * requerida por el formato de salida de swapToReduce.
+     *
+     * @param item El objeto (Cup o Lid) a identificar.
+     * @return Un arreglo de String con el tipo y tamaño, ej: {"cup", "4"}.
+     */
+    private String[] identifyItem(Object item) {
+        if (item instanceof Cup) {
+            return new String[] {"cup", String.valueOf(((Cup)item).getSize())};
+        } else if (item instanceof Lid) {
+            return new String[] {"lid", String.valueOf(((Lid)item).getSize())};
+        }
+        return new String[] {"", ""}; // Caso por defecto de seguridad
+    }
 }
