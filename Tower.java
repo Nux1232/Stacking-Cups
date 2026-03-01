@@ -260,4 +260,80 @@ public class Tower {
         axis.moveVertical(moveY);
         axis.makeVisible();
     }
+    
+    /**
+     * Crea una torre especificando la cantidad de tazas.
+     * Genera tazas con tamaños siguiendo la fórmula 2i - 1.
+     * Requisito 10: Crear torre indicando el número de tazas.
+     *
+     * @param cups Cantidad de tazas a generar.
+     */
+    public Tower(int cups) {
+        this.width = 100; // Ancho por defecto
+        this.maxHeight = 100; // Alto por defecto suficientemente grande
+        this.items = new ArrayList<>();
+        this.isVisible = false;
+        this.lastOperationOk = true;
+        
+        for (int i = 1; i <= cups; i++) {
+            // Cálculo del tamaño según el pdf: 1, 3, 5, 7...
+            int size = (2 * i) - 1; 
+            pushCup(size);
+        }
+    }
+
+    /**
+     * Intercambia la posición de dos elementos en la torre.
+     * Requisito 11: Intercambiar la posición de dos objetos.
+     *
+     * @param o1 Arreglo con tipo y tamaño del primer objeto, ej: {"cup", "4"}
+     * @param o2 Arreglo con tipo y tamaño del segundo objeto, ej: {"lid", "4"}
+     */
+    public void swap(String[] o1, String[] o2) {
+        int index1 = findItemIndex(o1[0], Integer.parseInt(o1[1]));
+        int index2 = findItemIndex(o2[0], Integer.parseInt(o2[1]));
+
+        if (index1 != -1 && index2 != -1) {
+            Object temp = items.get(index1);
+            items.set(index1, items.get(index2));
+            items.set(index2, temp);
+            lastOperationOk = true;
+            // Nota: Aquí se debería llamar a un método que recalcule 
+            // las coordenadas 'Y' visuales de toda la torre.
+        } else {
+            showError("Uno o ambos objetos no existen en la torre.");
+            lastOperationOk = false;
+        }
+    }
+
+    /**
+     * Tapa las tazas que tienen sus respectivas tapas dentro de la torre.
+     * Requisito 12: Permitir tapar las tazas.
+     */
+    public void cover() {
+        for (Object item : items) {
+            if (item instanceof Cup) {
+                Cup cup = (Cup) item;
+                if (existsLid(cup.getSize())) {
+                    cup.setCoveredStatus(true);
+                }
+            }
+        }
+        lastOperationOk = true;
+    }
+
+    /**
+     * Método auxiliar privado para encontrar el índice de un objeto.
+     */
+    private int findItemIndex(String type, int size) {
+        for (int i = 0; i < items.size(); i++) {
+            Object item = items.get(i);
+            if (type.equalsIgnoreCase("cup") && item instanceof Cup && ((Cup)item).getSize() == size) {
+                return i;
+            } else if (type.equalsIgnoreCase("lid") && item instanceof Lid && ((Lid)item).getSize() == size) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

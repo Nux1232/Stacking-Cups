@@ -77,4 +77,18 @@ public class Cup {
     public int getHeight() {
         return size; // Altura en cm
     }
+    
+    /**
+     * Cambia la apariencia de la taza para indicar que está tapada.
+     * Cumple con el requisito de usabilidad de hacer que luzcan diferentes.
+     */
+    public void setCoveredStatus(boolean isCovered) {
+        if (isCovered) {
+            view.changeColor("black"); // O cualquier color que denote "tapado"
+        } else {
+            // Requiere guardar el color original como atributo de la clase, 
+            // te sugiero agregar 'private String originalColor;' en el constructor.
+            // view.changeColor(originalColor); 
+        }
+    }
 }
