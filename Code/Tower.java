@@ -1,13 +1,12 @@
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Simulador de Torre de Tazas.
- * <p>
  * Esta clase representa una torre que permite apilar tazas (Cups) y tapas (Lids).
  * Gestiona la lógica de apilamiento, restricciones de altura y visualización.
  * Cumple con el Requisito de Construcción al reutilizar componentes del paquete shapes.
- * </p>
  *
  * @author Juan Pablo Cuervo Contreras
  * @author David Felipe Ortiz Salcedo
@@ -29,12 +28,12 @@ public class Tower {
     private static final int PIXELS_PER_CM = 10; 
     private static final int GROUND_Y = 250; 
     private static final int CENTER_X = 150;
-
+    
+    // Ciclo 1
     /**
      * Crea una nueva torre con las dimensiones especificadas.
-     * Requisito 1: Crear torre dados ancho y alto.
-     *
-     * @param width     El ancho deseado de la torre.
+     * 
+     * @param width El ancho deseado de la torre.
      * @param maxHeight La altura máxima permitida para la torre (en cm).
      */
     public Tower(int width, int maxHeight) {
@@ -49,8 +48,7 @@ public class Tower {
     /**
      * Adiciona una taza a la torre.
      * Verifica que la taza no exista previamente y que quepa en la altura disponible.
-     * Requisito 2: Adicionar una taza de la torre.
-     *
+     * 
      * @param size El tamaño de la taza a adicionar.
      */
     public void pushCup(int size) {
@@ -83,12 +81,49 @@ public class Tower {
         items.add(newCup);
         lastOperationOk = true;
     } // Cierre del método
+    
+    /**
+     * Elimina la última taza añadida a la torre.
+     */
+    public void popCup() {
+        for(int i = items.size() - 1; i >= 0; i--) {
+            if(items.get(i) instanceof Cup) {
+                Cup lastCupAdded = (Cup) items.get(i);
+                if (isVisible) lastCupAdded.getView().makeInvisible();
+                items.remove(i);
+                lastOperationOk = true;
+                return;
+            }
+        }
+        showError("No hay tazas para eliminar.");
+        lastOperationOk = false;
+    }
+    
+    /**
+     * Elimina una taza en específico de la torre.
+     * 
+     * @param size El tamaño de la taza.
+     */
+    public void removeCup(int size) {
+        for(int i = items.size() - 1; i >= 0; i--) {
+            if(items.get(i) instanceof Cup) {
+                Cup specificCup = (Cup) items.get(i);
+                if(specificCup.getSize() == size) {
+                    if(isVisible) specificCup.getView().makeInvisible();
+                    items.remove(i);
+                    lastOperationOk = true;
+                    return;
+                }
+            }
+        }
+        showError("No existe la taza " + size);
+        lastOperationOk = false;
+    }
 
     /**
      * Adiciona una tapa a la torre.
      * Verifica que la tapa no exista previamente y que quepa en la altura disponible.
      * Las tapas siempre miden 1 cm de altura.
-     * Requisito 3: Adicionar una tapa de la torre.
      *
      * @param size El tamaño asociado a la tapa.
      */
@@ -118,21 +153,98 @@ public class Tower {
         items.add(newLid);
         lastOperationOk = true;
     } // Cierre del método
+    
+    /**
+     * Elimina la última tapa añadida a la torre.
+     */
+    public void popLid() {
+        for(int i = items.size() - 1; i >= 0; i--) {
+            if(items.get(i) instanceof Lid) {
+                Lid lastLidAdded = (Lid) items.get(i);
+                if (isVisible) lastLidAdded.getView().makeInvisible();
+                items.remove(i);
+                lastOperationOk = true;
+                return;
+            }
+        }
+        showError("No hay tapas para eliminar.");
+        lastOperationOk = false;
+    }
+    
+    /**
+     * Elimina una tapa en específico de la torre.
+     * 
+     * @param size El tamaño de la tapa.
+     */
+    public void removeLid(int size) {
+        for(int i = items.size() - 1; i >= 0; i--) {
+            if(items.get(i) instanceof Lid) {
+                Lid specificLid = (Lid) items.get(i);
+                if(specificLid.getSize() == size) {
+                    if(isVisible) specificLid.getView().makeInvisible();
+                    items.remove(i);
+                    lastOperationOk = true;
+                    return;
+                }
+            }
+        }
+        showError("No existe la tapa " + size);
+        lastOperationOk = false;
+    }
+    
+    /**
+     * Ordena los elementos de la torre de mayor a menor.
+     * (solo se incluyen los que quepan).
+     */
+    public void orderTower() {
+        if(isVisible) {
+            for(Object item: items) {
+                if(item instanceof Cup) ((Cup) item).getView().makeInvisible();
+                if(item instanceof Lid) ((Cup) item).getView().makeInvisible();
+            }
+        }
+        
+        Collections.reverse(items);
+        
+        int totalHeight = 0;
+        ArrayList<Object> fittedItems = new ArrayList<>();
+        
+        for(Object item: items) {
+            int itemHeight = 0;
+            if(item instanceof Cup) itemHeight = ((Cup) item).getSize();
+            if(item instanceof Lid) itemHeight = 1;
+            
+            if(totalHeight + itemHeight <= maxHeight) {
+                fittedItems.add(item);
+                totalHeight += itemHeight;
+            }
+        }
+        items = fittedItems;
+        if(isVisible) redraw();
+        lastOperationOk = true;
+    }
+    
+    /**
+     * Ordena los elementos de forma inversa.
+     * (solo se incluyen los que quepan).
+     */
+    public void reverseTower() {
+        
+    }
 
     /**
      * Consulta la altura actual de los elementos apilados.
-     * Requisito 6: Consultar la altura de los elementos apilados.
      *
      * @return La altura total actual de la torre en centímetros.
      */
     public int height() {
         return currentHeight();
     } // Cierre del método
+    
 
     /**
      * Hace visible el simulador.
      * Muestra la regla y todos los elementos (tazas y tapas) en el canvas.
-     * Requisito 8: Hacer visible el simulador.
      */
     public void makeVisible() {
         isVisible = true;
@@ -146,15 +258,21 @@ public class Tower {
     /**
      * Hace invisible el simulador.
      * Oculta todos los elementos visuales del canvas.
-     * Requisito 8: Hacer invisible el simulador.
      */
     public void makeInvisible() {
         isVisible = false;
-        // Borrar regla visualmente (opcional si implementas eraseRuler)
+        // Borrar regla visualmente (opcional si implementa eraseRuler)
         for (Object item : items) {
             if (item instanceof Cup) ((Cup)item).getView().makeInvisible();
             if (item instanceof Lid) ((Lid)item).getView().makeInvisible();
         }
+    } // Cierre del método
+    
+    /**
+     * Termina el simulador.
+     */
+    public void exit() {
+        System.exit(0);
     } // Cierre del método
 
     /**
@@ -165,11 +283,11 @@ public class Tower {
     public boolean ok() {
         return lastOperationOk;
     } // Cierre del método
-
+    
+    // Ciclo 2
     /**
      * Crea una torre especificando la cantidad de tazas.
      * Genera tazas con tamaños siguiendo la fórmula 2i - 1.
-     * Requisito 10: Crear torre indicando el número de tazas.
      *
      * @param cups Cantidad de tazas a generar.
      */
@@ -189,7 +307,6 @@ public class Tower {
 
     /**
      * Intercambia la posición de dos elementos en la torre.
-     * Requisito 11: Intercambiar la posición de dos objetos.
      *
      * @param o1 Arreglo con tipo y tamaño del primer objeto, ej: {"cup", "4"}
      * @param o2 Arreglo con tipo y tamaño del segundo objeto, ej: {"lid", "4"}
@@ -213,7 +330,6 @@ public class Tower {
     
     /**
      * Consulta un movimiento de intercambio que reduzca la altura de la torre.
-     * Requisito 13: Consultar un movimiento que reduzca la altura.
      *
      * @return Arreglo 2D con los identificadores de los objetos a intercambiar,
      * ej: {{"cup", "4"}, {"lid", "4"}}. Retorna null si no hay ninguno.
@@ -255,7 +371,6 @@ public class Tower {
 
     /**
      * Tapa las tazas que tienen sus respectivas tapas dentro de la torre.
-     * Requisito 12: Permitir tapar las tazas.
      */
     public void cover() {
         for (Object item : items) {
@@ -343,7 +458,29 @@ public class Tower {
     private void showError(String msg) {
         if (isVisible) JOptionPane.showMessageDialog(null, msg);
     } // Cierre del método
-
+    
+    /**
+     * Dibuja de nuevo la taza o tapa, sólo si el simulador es visible.
+     */
+    private void redraw() {
+        int totalHeight = 0;
+        for(Object item: items){
+            if(item instanceof Cup) {
+                Cup cup = (Cup) item;
+                int yPos = GROUND_Y - (totalHeight + cup.getSize()) * PIXELS_PER_CM;
+                cup.getView().moveVertical(yPos);
+                cup.getView().makeVisible();
+                totalHeight += cup.getSize();
+            } else if(item instanceof Lid) {
+                Lid lid = (Lid) item;
+                int yPos = GROUND_Y - (totalHeight + 1) * PIXELS_PER_CM;
+                lid.getView().moveVertical(yPos);
+                lid.getView().makeVisible();
+                totalHeight ++;
+            }
+        }
+    }
+    
     /**
      * Dibuja una regla visual que marca la altura máxima permitida.
      * Solo se dibuja si el simulador es visible.
