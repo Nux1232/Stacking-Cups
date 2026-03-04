@@ -55,7 +55,7 @@ public class Lid {
         // Se ajusta respecto a la posición por defecto de Rectangle (70, 15)
         view.moveHorizontal((x - 2) - 70); 
         view.moveVertical(y - 15);
-    }
+    } // Cierre del constructor
     
     /**
      * Obtiene la vista gráfica de la tapa.
@@ -65,7 +65,7 @@ public class Lid {
      */
     public Rectangle getView() {
         return view;
-    }
+    } // Cierre del método
 
     /**
      * Obtiene el tamaño numérico de la tapa.
@@ -74,5 +74,5 @@ public class Lid {
      */
     public int getSize() {
         return size;
-    }
-}
+    } // Cierre del método
+} // Cierre de la clase
