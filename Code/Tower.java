@@ -192,46 +192,7 @@ public class Tower {
         lastOperationOk = false;
     }
     
-    /**
-     * Ordena los elementos de la torre de mayor a menor.
-     * (solo se incluyen los que quepan).
-     */
-    public void orderTower() {
-        if(isVisible) {
-            for(Object item: items) {
-                if(item instanceof Cup) ((Cup) item).getView().makeInvisible();
-                if(item instanceof Lid) ((Cup) item).getView().makeInvisible();
-            }
-        }
-        
-        Collections.reverse(items);
-        
-        int totalHeight = 0;
-        ArrayList<Object> fittedItems = new ArrayList<>();
-        
-        for(Object item: items) {
-            int itemHeight = 0;
-            if(item instanceof Cup) itemHeight = ((Cup) item).getSize();
-            if(item instanceof Lid) itemHeight = 1;
-            
-            if(totalHeight + itemHeight <= maxHeight) {
-                fittedItems.add(item);
-                totalHeight += itemHeight;
-            }
-        }
-        items = fittedItems;
-        if(isVisible) redraw();
-        lastOperationOk = true;
-    }
     
-    /**
-     * Ordena los elementos de forma inversa.
-     * (solo se incluyen los que quepan).
-     */
-    public void reverseTower() {
-        
-    }
-
     /**
      * Consulta la altura actual de los elementos apilados.
      *
@@ -283,6 +244,88 @@ public class Tower {
     public boolean ok() {
         return lastOperationOk;
     } // Cierre del método
+    
+    /**
+     * Calcula y devuelve los tamaños de las tazas que están correctamente tapadas.
+     * * @return Un arreglo de enteros con los tamaños de las tazas tapadas.
+     */
+    public int[] liddedCups() {
+        ArrayList<Integer> liddedList = new ArrayList<>();
+        
+        // Recorremos todos los elementos de la torre
+        for (Object item : items) {
+            // Verificamos si el elemento es una taza
+            if (item instanceof Cup) {
+                Cup cup = (Cup) item;
+                // Si existe una tapa del mismo tamaño en la torre, la taza está tapada
+                if (existsLid(cup.getSize())) {
+                    liddedList.add(cup.getSize());
+                }
+            }
+        }
+        
+        // Convertimos el ArrayList a un arreglo primitivo (int[]) para el retorno
+        int[] result = new int[liddedList.size()];
+        for(int i = 0; i < liddedList.size(); i++) {
+            result[i] = liddedList.get(i);
+        }
+        
+        lastOperationOk = true;
+        return result;
+    } // Cierre del método
+
+    /**
+     * Construye y retorna la representación en matriz de todos los elementos apilados.
+     * * @return Matriz 2D con los identificadores de los objetos, ej: {{"cup", "5"}, {"lid", "5"}}.
+     */
+    public String[][] stackingItems() {
+        // Inicializamos la matriz con la cantidad actual de items
+        String[][] stackMatrix = new String[items.size()][2];
+        
+        // Llenamos la matriz usando el método identifyItem que ya creaste
+        for (int i = 0; i < items.size(); i++) {
+            stackMatrix[i] = identifyItem(items.get(i));
+        }
+        
+        lastOperationOk = true;
+        return stackMatrix;
+    } // Cierre del método
+
+    /**
+     * Reorganiza la torre de tazas y tapas ordenándolas por tamaño de mayor a menor.
+     * La base (índice 0) tendrá los elementos más grandes.
+     */
+    public void orderTower() {
+        items.sort((obj1, obj2) -> {
+            // Obtenemos los tamaños sin importar si son tazas o tapas
+            int size1 = (obj1 instanceof Cup) ? ((Cup)obj1).getSize() : ((Lid)obj1).getSize();
+            int size2 = (obj2 instanceof Cup) ? ((Cup)obj2).getSize() : ((Lid)obj2).getSize();
+            
+            if (size1 != size2) {
+                // Orden descendente: los números mayores van primero
+                return Integer.compare(size2, size1); 
+            } else {
+                // Si tienen el mismo tamaño, la taza va debajo de la tapa
+                if (obj1 instanceof Cup && obj2 instanceof Lid) return -1;
+                if (obj1 instanceof Lid && obj2 instanceof Cup) return 1;
+                return 0;
+            }
+        });
+        
+        lastOperationOk = true;
+    } // Cierre del método
+
+    /**
+     * Invierte el orden completo de la torre (la base pasa a ser la cima y viceversa).
+     */
+    public void reverseTower() {
+        // Usamos la clase Collections de Java para invertir la lista nativamente
+        java.util.Collections.reverse(items);
+        lastOperationOk = true;
+    } // Cierre del método
+    
+    
+    
     
     // Ciclo 2
     /**
