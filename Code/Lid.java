@@ -1,78 +1,70 @@
-import javax.swing.*;
-
 /**
- * Representa una tapa (Lid) que se coloca sobre las tazas en la simulación.
- * <p>
- * Esta clase encapsula la lógica visual de la tapa. Cumple con el Requisito Funcional
- * de tener una altura fija de 1 cm y con el Requisito de Construcción al reutilizar
- * la clase {@link Rectangle} del paquete shapes mediante composición.
- * </p>
- *
- * @author Juan Pablo Cuervo Contreras
- * @author David Felipe Ortiz Salcedo
- * @version 1.0
+ * Representa una tapa que se coloca sobre las tazas en la simulación.
+ * @author Juan Pablo Cuervo Contreras, David Felipe Ortiz Salcedo
+ * @version 07/03/2026
  */
-public class Lid {
-    
-    /** El tamaño numérico asociado a la tapa (correspondiente a su taza). */
-    private int size;
-    
-    /** La representación visual de la tapa (objeto compuesto). */
+public class Lid extends StackItem {
     private Rectangle view;
 
     /**
      * Constructor de la clase Lid.
-     * Crea una tapa visualmente distinguible.
-     * <p>
-     * Implementa la lógica de dimensiones:
-     * 1. La altura se fija en 10 píxeles (equivalente a 1 cm según el requisito).
-     * 2. El ancho se calcula para ser ligeramente mayor que la taza, mejorando la representación visual.
-     * </p>
-     *
-     * @param size  El tamaño numérico de la tapa.
+     * 
+     * @param i  El identificador de la tapa.
      * @param color El color de la tapa (debe coincidir con el de la taza).
-     * @param x     La coordenada X deseada en el canvas.
-     * @param y     La coordenada Y deseada en el canvas.
+     * @param x     La coordenada X deseada.
+     * @param y     La coordenada Y deseada.
      */
-    public Lid(int size, String color, int x, int y) {
-        this.size = size;
-        
-        // La tapa es un poco más ancha que la taza para que parezca una tapa
-        // Se suman 4 píxeles extra al ancho estándar de la taza
-        int widthPx = (size * 20) + 4; 
-        
-        // Requisito Funcional: Las tapas miden 1 cm de alto.
-        // Asumimos escala 1 cm = 10 px
+    public Lid(int identifier, String color, int x, int y) {
+        super(identifier, color);
+        int widthPx = (identifier * 20) + 4;
         int heightPx = 10; 
-        
-        // Inicialización del componente visual
+ 
         view = new Rectangle();
         view.changeSize(heightPx, widthPx);
         view.changeColor(color);
-        
-        // Ajuste de posición (centrar respecto a la taza que es más angosta)
-        // Se resta 2 a X para compensar los 4 píxeles extra de ancho (centrado)
-        // Se ajusta respecto a la posición por defecto de Rectangle (70, 15)
         view.moveHorizontal((x - 2) - 70); 
         view.moveVertical(y - 15);
     } // Cierre del constructor
     
     /**
      * Obtiene la vista gráfica de la tapa.
-     * Permite a la clase Tower gestionar la visibilidad de este objeto.
      *
-     * @return El objeto Rectangle que representa visualmente a esta tapa.
+     * @return El objeto Rectangle que representa visualmente a la tapa.
      */
+    
     public Rectangle getView() {
         return view;
     } // Cierre del método
 
     /**
-     * Obtiene el tamaño numérico de la tapa.
-     *
-     * @return El tamaño de la tapa.
+     * Retorna la altura de la tapa (debe ser 1cm).
+     * 
+     * @return int La altura de la tapa.
      */
-    public int getSize() {
-        return size;
+    public int getHeight() {
+        return 1;
+    } // Cierre del método
+    
+    /**
+     * Hace que la tapa se pueda visualizar.
+     */
+    public void makeVisible() {
+        view.makeVisible();
+    } // Cierre del método
+    
+    /**
+     * Hace que la tapa se pueda ver.
+     */
+    public void makeInvisible() {
+        view.makeInvisible();
+    } // Cierre del método
+    
+    /**
+     * Dice de qué tipo es el item (en este caso, una tapa).
+     * 
+     * @return String Qué tipo de item es.
+     */
+    public String getType() {
+        return "lid";
     } // Cierre del método
 } // Cierre de la clase

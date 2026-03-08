@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=StackItem
+comment0.text=\r\n\ Clase\ padre\ que\ puede\ ser\ una\ taza\ o\ tapa.\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras,\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 07/03/2026\r\n
+comment1.params=identifier\ color
+comment1.target=StackItem(int,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ StackItem.\r\n\ \r\n\ @param\ size\ El\ identificador\ del\ item.\r\n\ @param\ color\ El\ color\ del\ item.\r\n
+comment2.params=
+comment2.target=Rectangle\ getView()
+comment2.text=\r\n\ Retorna\ la\ vista\ gr\u00E1fica\ de\ un\ item\:\ taza\ o\ tapa.\r\n\ @return\ Rectangle\ El\ objeto\ que\ permite\ representar\ visualmente\ el\ item.\r\n
+comment3.params=
+comment3.target=int\ getHeight()
+comment3.text=\r\n\ Retorna\ la\ altura\ de\ un\ item\:\ taza\ o\ tapa.\r\n\ @return\ int\ La\ altura\ del\ item.\r\n
+comment4.params=
+comment4.target=int\ getIdentifier()
+comment4.text=\r\n\ Obtiene\ el\ tama\u00F1o\ de\ un\ item\ a\ partir\ de\ su\ identificador\:\ taza\ o\ tapa.\r\n\ @return\ int\ El\ tama\u00F1o\ del\ item.\r\n
+comment5.params=
+comment5.target=java.lang.String\ getType()
+comment5.text=\r\n\ Retorna\ si\ es\ una\ taza\ o\ tapa.\r\n
+comment6.params=
+comment6.target=void\ makeVisible()
+comment6.text=\r\n\ Hace\ que\ el\ item\ se\ pueda\ visualizar.\r\n
+comment7.params=
+comment7.target=void\ makeInvisible()
+comment7.text=\r\n\ Hace\ que\ el\ item\ no\ se\ pueda\ ver.\r\n
+numComments=8
