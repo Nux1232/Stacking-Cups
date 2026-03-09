@@ -357,8 +357,9 @@ public class Tower {
                 int newHeight = height();
 
                 // revertir el intercambio para que no se afecte la altura
-                items.set(j, items.get(i));
-                items.set(i, temp);
+                temp = items.get(i);
+                items.set(i, items.get(j));
+                items.set(j, temp);
 
                 // ver si se redujo la altura
                 if (newHeight < initialHeight) {
@@ -389,7 +390,7 @@ public class Tower {
         lastOperationOk = true;
     } // Cierre del método
     
-    // --- MÉTODOS PRIVADOS (Auxiliares) ---
+    // Métodos Auxiliares
 
     /**
      * Calcula la coordenada Y en píxeles para posicionar el siguiente elemento.
