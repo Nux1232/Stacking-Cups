@@ -9,14 +9,15 @@ public class Lid extends StackItem {
     /**
      * Constructor de la clase Lid.
      * 
-     * @param i  El identificador de la tapa.
-     * @param color El color de la tapa (debe coincidir con el de la taza).
+     * @param size El tamaño de la tapa (debe coincidir con el de la taza).
+     * @param color El color de la tapa.
      * @param x     La coordenada X deseada.
      * @param y     La coordenada Y deseada.
+     * @param creationId El identificador de orden de creación.
      */
-    public Lid(int identifier, String color, int x, int y) {
-        super(identifier, color);
-        int widthPx = (identifier * 20) + 4;
+    public Lid(int size, String color, int x, int y, int creationId) {
+        super(size, color, creationId);
+        int widthPx = (size * 20) + 4;
         int heightPx = 10; 
  
         view = new Rectangle();

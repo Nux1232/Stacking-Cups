@@ -41,6 +41,13 @@ public abstract class Figure {
         yPosition += distance;
         draw();
     }
+    
+    public void moveTo(int newX, int newY) {
+        erase();
+        xPosition = newX;
+        yPosition = newY;
+        draw();
+    }
 
     public void slowMoveHorizontal(int distance) {
         int delta = (distance < 0) ? -1 : 1;

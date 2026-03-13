@@ -12,15 +12,16 @@ public class Cup extends StackItem {
     /**
      * Constructor de la clase Cup.
      *
-     * @param i  El identificador de la taza (Ejemplo: 1, 2, 3...).
-     * @param color El color visual de la taza (Ejemplo: "red", "blue").
+     * @param size El tamaño de la taza.
+     * @param color El color visual de la taza.
      * @param x     La coordenada X deseada.
      * @param y     La coordenada Y deseada.
+     * @param creationId El id único de creación.
      */
-    public Cup(int identifier, String color, int x, int y) {
-        super(identifier, color);
-        int widthPx = identifier * 20; 
-        int heightPx = identifier * 10;
+    public Cup(int size, String color, int x, int y, int creationId) {
+        super(size, color, creationId);
+        int widthPx = size * 20; 
+        int heightPx = size * 10;
         
         view = new Rectangle();
         view.changeSize(heightPx, widthPx);
@@ -40,12 +41,12 @@ public class Cup extends StackItem {
     } // Cierre del método
     
     /**
-     * Obtiene la altura de la taza en cm a partir de su identificador.
+     * Obtiene la altura de la taza en cm a partir de su tamaño.
      *
      * @return La altura en cm.
      */
     public int getHeight() {
-        return identifier;
+        return size;
     } // Cierre del método
     
     /**

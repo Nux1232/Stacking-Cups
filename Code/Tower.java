@@ -15,6 +15,8 @@ public class Tower {
     private ArrayList<StackItem> items;
     private boolean isVisible;
     private boolean lastOperationOk;
+    private int cupCounter = 1;
+    private int lidCounter = 1;
     private static final int pixelPerCm = 10; 
     private static final int groundY = 250; 
     private static final int centerX = 150;
@@ -41,24 +43,27 @@ public class Tower {
      * 
      * @param size El tamaño de la taza a adicionar.
      */
-    public void pushCup(int i) {
-        if (existsCup(i)) {
-            showError("Ya existe la taza " + i);
+    public void pushCup(int size) {
+        if (existsCup(size)) {
+            showError("Ya existe la taza " + size);
             lastOperationOk = false;
             return;
         }
         
-        int cupHeightCm = i; 
-        if (currentHeight() + cupHeightCm > maxHeight) {
+        int cupHeightCm = size; 
+        int newBaseCm = calculateNextBaseCm("cup", cupHeightCm);
+        int newMaxHeight = Math.max(currentHeight(), newBaseCm + cupHeightCm);
+        
+        if (newMaxHeight > maxHeight) {
             showError("La torre excede la altura máxima.");
             lastOperationOk = false;
             return;
         }
 
-        String color = getColorForSize(i);
-        int yPos = calculateNextY(cupHeightCm);
+        String color = getColorForSize(size);
+        int yPos = groundY - (newBaseCm + cupHeightCm) * pixelPerCm;
 
-        Cup newCup = new Cup(i, color, centerX, yPos);
+        Cup newCup = new Cup(size, color, centerX, yPos, cupCounter++);
         if (isVisible) newCup.getView().makeVisible();
         
         items.add(newCup);
@@ -86,14 +91,14 @@ public class Tower {
     /**
      * Elimina una taza en específico de la torre.
      * 
-     * @param size El tamaño de la taza.
+     * @param id El identificador de creación de la taza.
      */
-    public void removeCup(int i) {
+    public void removeCup(int id) {
         for(int n = items.size() - 1; n >= 0; n--) {
-            StackItem item = items.get(i);
+            StackItem item = items.get(n);
             
             if(item.getType().equals("cup")) {
-                if(item.getIdentifier() == i) {
+                if(item.getIdentifier() == id) {
                     if(isVisible) item.makeInvisible();
                     items.remove(n);
                     lastOperationOk = true;
@@ -101,7 +106,7 @@ public class Tower {
                 }
             }
         }
-        showError("No existe la taza " + i);
+        showError("No existe la taza " + id);
         lastOperationOk = false;
     }
 
@@ -112,24 +117,26 @@ public class Tower {
      *
      * @param size El tamaño asociado a la tapa.
      */
-    public void pushLid(int i) {
-        if (existsLid(i)) {
-            showError("Ya existe la tapa " + i);
+    public void pushLid(int size) {
+        if (existsLid(size)) {
+            showError("Ya existe la tapa " + size);
             lastOperationOk = false;
             return;
         }
 
         int lidHeightCm = 1; 
+        int newBaseCm = calculateNextBaseCm("lid", lidHeightCm);
+        int newMaxHeight = Math.max(currentHeight(), newBaseCm + lidHeightCm);
 
-        if (currentHeight() + lidHeightCm > maxHeight) {
+        if (newMaxHeight > maxHeight) {
             showError("No cabe la tapa.");
             lastOperationOk = false;
             return;
         }
 
-        String color = getColorForSize(i);
-        int yPos = calculateNextY(lidHeightCm);
-        Lid newLid = new Lid(i, color, centerX, yPos);
+        String color = getColorForSize(size);
+        int yPos = groundY - (newBaseCm + lidHeightCm) * pixelPerCm;
+        Lid newLid = new Lid(size, color, centerX, yPos, lidCounter++);
         
         if (isVisible) newLid.makeVisible();
         items.add(newLid);
@@ -157,14 +164,14 @@ public class Tower {
     /**
      * Elimina una tapa en específico de la torre.
      * 
-     * @param size El tamaño de la tapa.
+     * @param id El identificador de creación de la tapa.
      */
-    public void removeLid(int i) {
+    public void removeLid(int id) {
         for(int n = items.size() - 1; n >= 0; n--) {
-            StackItem item = items.get(i);
+            StackItem item = items.get(n);
             
             if(item.getType().equals("lid")) {
-                if(item.getIdentifier() == i) {
+                if(item.getIdentifier() == id) {
                     if(isVisible) item.makeInvisible();
                     items.remove(n);
                     lastOperationOk = true;
@@ -172,14 +179,14 @@ public class Tower {
                 }
             }
         }
-        showError("No existe la tapa " + i);
+        showError("No existe la tapa " + id);
         lastOperationOk = false;
     }
     
     /**
-     * Calcula y devuelve los tamaños de las tazas que están correctamente tapadas.
+     * Calcula y devuelve los identificadores de creación de las tazas que están correctamente tapadas.
      * 
-     * @return Un arreglo de enteros con los tamaños de las tazas tapadas.
+     * @return Un arreglo de enteros con los identificadores de las tazas tapadas.
      */
     public int[] lidedCups() {
         ArrayList<Integer> lidedList = new ArrayList<>();
@@ -187,7 +194,7 @@ public class Tower {
         for (StackItem item : items) {
             if (item.getType().equals("cup")) {
                 Cup cup = (Cup) item;
-                if (existsLid(cup.getIdentifier())) {
+                if (existsLid(cup.getSize())) {
                     lidedList.add(cup.getIdentifier());
                 }
             }
@@ -223,19 +230,20 @@ public class Tower {
      * La base (índice 0) tendrá los elementos más grandes.
      */
     public void orderTower() {
-        items.sort((obj1, obj2) -> {
-            int size1 = (obj1.getType().equals("cup")) ? ((Cup)obj1).getIdentifier() : ((Lid)obj1).getIdentifier();
-            int size2 = (obj2.getType().equals("cup")) ? ((Cup)obj2).getIdentifier() : ((Lid)obj2).getIdentifier();
+        items.sort((item1, item2) -> {
+            int size1 = item1.getSize();
+            int size2 = item2.getSize();
             
             if (size1 != size2) {
                 return Integer.compare(size2, size1); 
             } else {
-                if (obj1.getType().equals("cup") && obj2.getType().equals("lid")) return -1;
-                if (obj1.getType().equals("lid") && obj2.getType().equals("cup")) return 1;
+                if (item1.getType().equals("cup") && item2.getType().equals("lid")) return -1;
+                if (item1.getType().equals("lid") && item2.getType().equals("cup")) return 1;
                 return 0;
             }
         });
         
+        if (isVisible) redraw();
         lastOperationOk = true;
     } // Cierre del método
 
@@ -243,7 +251,8 @@ public class Tower {
      * Invierte el orden completo de la torre.
      */
     public void reverseTower() {
-        java.util.Collections.reverse(items);
+        Collections.reverse(items);
+        if (isVisible) redraw();
         lastOperationOk = true;
     } // Cierre del método
 
@@ -349,16 +358,13 @@ public class Tower {
         for (int i = 0; i < items.size(); i++) {
             for (int j = i + 1; j < items.size(); j++) {
                 // intercambiar elementos en la lista
-                StackItem temp = items.get(i);
-                items.set(i, items.get(j));
-                items.set(j, temp);
+                Collections.swap(items, i, j);
 
                 // ver nueva altura
                 int newHeight = height();
 
                 // revertir el intercambio para que no se afecte la altura
-                items.set(j, items.get(i));
-                items.set(i, temp);
+                Collections.swap(items, i, j);
 
                 // ver si se redujo la altura
                 if (newHeight < initialHeight) {
@@ -381,7 +387,7 @@ public class Tower {
         for (StackItem item : items) {
             if (item.getType().equals("cup")) {
                 Cup cup = (Cup) item;
-                if (existsLid(cup.getIdentifier())) {
+                if (existsLid(cup.getSize())) {
                     cup.setCoveredStatus(true);
                 }
             }
@@ -392,30 +398,65 @@ public class Tower {
     // --- MÉTODOS PRIVADOS (Auxiliares) ---
 
     /**
-     * Calcula la coordenada Y en píxeles para posicionar el siguiente elemento.
-     * Se basa en un apilamiento invertido (Y=0 es arriba).
-     *
-     * @param itemHeightCm La altura del elemento a adicionar en cm.
-     * @return La coordenada Y calculada.
+     * Calcula los niveles (bases) de cada elemento para determinar la altura total.
+     * Si un item es una taza y es más pequeña que la taza inmediatamente inferior,
+     * se asume que se introduce dentro de ella, compartiendo su misma base.
      */
-    private int calculateNextY(int itemHeightCm) {
-        int currentHeightPx = currentHeight() * pixelPerCm;
-        int itemHeightPx = itemHeightCm * pixelPerCm;
-        return groundY - currentHeightPx - itemHeightPx;
+    private int[] calculateAllBases() {
+        int[] bases = new int[items.size()];
+        if (items.isEmpty()) return bases;
+        
+        bases[0] = 0;
+        for (int i = 1; i < items.size(); i++) {
+            StackItem prevItem = items.get(i - 1);
+            StackItem item = items.get(i);
+            
+            if (item.getType().equals("cup") && prevItem.getType().equals("cup") && item.getHeight() < prevItem.getHeight()) {
+                bases[i] = bases[i - 1]; // Se anida, comparte la misma base
+            } else {
+                int prevHeight = prevItem.getType().equals("lid") ? 1 : prevItem.getHeight();
+                bases[i] = bases[i - 1] + prevHeight; // Se apila encima
+            }
+        }
+        return bases;
+    }
+
+    /**
+     * Calcula la base (en cm) donde se apoyará el siguiente elemento a insertar.
+     */
+    private int calculateNextBaseCm(String itemType, int itemHeightCm) {
+        if (items.isEmpty()) return 0;
+        
+        int lastIndex = items.size() - 1;
+        StackItem lastItem = items.get(lastIndex);
+        int[] bases = calculateAllBases();
+        int lastBase = bases[lastIndex];
+        
+        if (itemType.equals("cup") && lastItem.getType().equals("cup") && itemHeightCm < lastItem.getHeight()) {
+            return lastBase; // Se anida en la última taza
+        } else {
+            int lastHeight = lastItem.getType().equals("lid") ? 1 : lastItem.getHeight();
+            return lastBase + lastHeight; // Se apila sobre el último elemento
+        }
     } // Cierre del método
 
     /**
-     * Calcula la altura lógica total acumulada de la torre.
+     * Calcula la altura lógica total de la torre, considerando que tazas
+     * más pequeñas pueden anidarse dentro de tazas más grandes.
      *
-     * @return La suma de alturas de tazas y tapas.
+     * @return La altura total alcanzada.
      */
     private int currentHeight() {
-        int h = 0;
-        for (StackItem item : items) {
-            if (item.getType().equals("cup")) h += item.getHeight();
-            else if (item.getType().equals("lid")) h += 1;
+        if (items.isEmpty()) return 0;
+        int[] bases = calculateAllBases();
+        int maxH = 0;
+        for (int i = 0; i < items.size(); i++) {
+            int h = items.get(i).getType().equals("lid") ? 1 : items.get(i).getHeight();
+            if (bases[i] + h > maxH) {
+                maxH = bases[i] + h;
+            }
         }
-        return h;
+        return maxH;
     } // Cierre del método
 
     /**
@@ -426,7 +467,7 @@ public class Tower {
      */
     private boolean existsCup(int size) {
         for(StackItem item: items) {
-            if(item.getType().equals("cup") && item.getIdentifier() == size) {
+            if(item.getType().equals("cup") && item.getSize() == size) {
                 return true;
             }
         }
@@ -441,7 +482,7 @@ public class Tower {
      */
     private boolean existsLid(int size) {
         for (StackItem item : items) {
-            if(item.getType().equals("lid") && item.getIdentifier() == size) {
+            if(item.getType().equals("lid") && item.getSize() == size) {
                 return true;
             }
         }
@@ -472,20 +513,22 @@ public class Tower {
      * Dibuja de nuevo la taza o tapa, sólo si el simulador es visible.
      */
     private void redraw() {
-        int totalHeight = 0;
-        for(StackItem item: items){
+        if (!isVisible) return;
+        int[] bases = calculateAllBases();
+        for(int i = 0; i < items.size(); i++){
+            StackItem item = items.get(i);
+            int baseCm = bases[i];
+            
             if(item.getType().equals("cup")) {
                 Cup cup = (Cup) item;
-                int yPos = groundY - (totalHeight + cup.getIdentifier()) * pixelPerCm;
-                cup.getView().moveVertical(yPos);
+                int yPos = groundY - (baseCm + cup.getSize()) * pixelPerCm;
+                cup.getView().moveTo(centerX, yPos);
                 cup.getView().makeVisible();
-                totalHeight += cup.getIdentifier();
             } else if(item.getType().equals("lid")) {
                 Lid lid = (Lid) item;
-                int yPos = groundY - (totalHeight + 1) * pixelPerCm;
-                lid.getView().moveVertical(yPos);
+                int yPos = groundY - (baseCm + 1) * pixelPerCm;
+                lid.getView().moveTo(centerX - 2, yPos);
                 lid.getView().makeVisible();
-                totalHeight ++;
             }
         }
     }
@@ -528,12 +571,12 @@ public class Tower {
     /**
      * Método auxiliar privado para encontrar el índice de un objeto.
      */
-    private int findItemIndex(String type, int size) {
+    private int findItemIndex(String type, int id) {
         for (int i = 0; i < items.size(); i++) {
             StackItem item = items.get(i);
-            if (type.equalsIgnoreCase("cup") && item.getType().equals("cup") && ((Cup)item).getIdentifier() == size) {
+            if (type.equalsIgnoreCase("cup") && item.getType().equals("cup") && ((Cup)item).getIdentifier() == id) {
                 return i;
-            } else if (type.equalsIgnoreCase("lid") && item.getType().equals("lid") && ((Lid)item).getIdentifier() == size) {
+            } else if (type.equalsIgnoreCase("lid") && item.getType().equals("lid") && ((Lid)item).getIdentifier() == id) {
                 return i;
             }
         }

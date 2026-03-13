@@ -5,18 +5,21 @@
  * @version 07/03/2026
  */
 public abstract class StackItem {
-    protected int identifier;
+    protected int size;
+    protected int creationId;
     protected String color;
     
     /**
      * Constructor de la clase StackItem.
      * 
-     * @param size El identificador del item.
+     * @param size El tamaño del item.
      * @param color El color del item.
+     * @param creationId El identificador único por orden de creación.
      */
-    public StackItem(int identifier, String color) {
-        this.identifier = identifier;
+    public StackItem(int size, String color, int creationId) {
+        this.size = size;
         this.color = color;
+        this.creationId = creationId;
     } // Cierre del constructor
     
     /**
@@ -32,11 +35,19 @@ public abstract class StackItem {
     public abstract int getHeight(); // Cierre del método
     
     /**
-     * Obtiene el tamaño de un item a partir de su identificador: taza o tapa.
-     * @return int El tamaño del item.
+     * Obtiene el identificador único de creación de un item.
+     * @return int El identificador de creación.
      */
     public int getIdentifier() {
-        return identifier;
+        return creationId;
+    } //Cierre del método
+
+    /**
+     * Obtiene el tamaño de un item.
+     * @return int El tamaño del item.
+     */
+    public int getSize() {
+        return size;
     } //Cierre del método
     
     /**
