@@ -1,7 +1,8 @@
 /**
  * Representa una tapa que se coloca sobre las tazas en la simulación.
- * @author Juan Pablo Cuervo Contreras, David Felipe Ortiz Salcedo
- * @version 07/03/2026
+ * @author Juan Pablo Cuervo Contreras
+ * @author David Felipe Ortiz Salcedo
+ * @version 14/03/2026
  */
 public class Lid extends StackItem {
     private Rectangle view;
@@ -27,6 +28,7 @@ public class Lid extends StackItem {
         view.moveVertical(y - 15);
     } // Cierre del constructor
     
+    @Override
     /**
      * Obtiene la vista gráfica de la tapa.
      *
@@ -36,7 +38,8 @@ public class Lid extends StackItem {
     public Rectangle getView() {
         return view;
     } // Cierre del método
-
+    
+    @Override
     /**
      * Retorna la altura de la tapa (debe ser 1cm).
      * 
@@ -46,6 +49,7 @@ public class Lid extends StackItem {
         return 1;
     } // Cierre del método
     
+    @Override
     /**
      * Hace que la tapa se pueda visualizar.
      */
@@ -53,6 +57,7 @@ public class Lid extends StackItem {
         view.makeVisible();
     } // Cierre del método
     
+    @Override
     /**
      * Hace que la tapa se pueda ver.
      */
@@ -60,6 +65,7 @@ public class Lid extends StackItem {
         view.makeInvisible();
     } // Cierre del método
     
+    @Override
     /**
      * Dice de qué tipo es el item (en este caso, una tapa).
      * 

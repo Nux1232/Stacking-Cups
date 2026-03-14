@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=TowerContestTest
-comment0.text=\r\n\ The\ test\ class\ TowerContestTest.\r\n\ Pruebas\ unitarias\ para\ la\ clase\ TowerContest\ (2\ pruebas\ por\ cada\ m\u00E9todo).\r\n\r\n\ @author\ \ Juan\ Pablo\ Cuervo\ Contreras\ /\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 09/03/2026\r\n
+comment0.text=\r\n\ Pruebas\ unitarias\ para\ la\ clase\ TowerContest\ (2\ pruebas\ por\ cada\ m\u00E9todo).\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras\ \r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 14/03/2026\r\n
 comment1.params=
 comment1.target=TowerContestTest()
 comment1.text=\r\n\ Default\ constructor\ for\ test\ class\ TowerContestTest\r\n

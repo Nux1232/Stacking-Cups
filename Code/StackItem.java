@@ -1,8 +1,9 @@
 /**
  * Clase padre que puede ser una taza o tapa.
  *
- * @author Juan Pablo Cuervo Contreras, David Felipe Ortiz Salcedo
- * @version 07/03/2026
+ * @author Juan Pablo Cuervo Contreras
+ * @author David Felipe Ortiz Salcedo
+ * @version 14/03/2026
  */
 public abstract class StackItem {
     protected int size;

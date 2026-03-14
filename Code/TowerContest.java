@@ -12,13 +12,12 @@ import java.util.HashSet;
  *
  * @author Juan Pablo Cuervo Contreras
  * @author David Felipe Ortiz Salcedo
- * @version 09/03/2026
+ * @version 14/03/2026
  */
 public class TowerContest {
 
     /**
-     * Resuelve el problema de la maratón determinando el orden de las tazas.
-     * La entrada y la salida corresponden a lo definido en el problema de la maratón.
+     * Clase que resuelve el problema de la maratón.
      *
      * @param n Cantidad de tazas a poner en la torre.
      * @param h La altura requerida que debe alcanzar la torre.
@@ -81,12 +80,12 @@ public class TowerContest {
         }
         
         return "impossible";
-    }
+    } // Cierre del método
 
     /**
-     * Simula y grafica la solución del problema de la maratón empleando la clase Tower.
-     * La entrada corresponde a lo definido en el problema de la maratón. La salida es la imagen 
-     * de la solución, si existe y es posible graficarla; en caso contrario, presenta un mensaje indicándolo.
+     * Simula la solución del problema de la maratón.
+     * La salida es la imagen de la solución, si existe y es posible graficarla; 
+     * en caso contrario, presenta un mensaje de error.
      * 
      * @param n Cantidad de tazas a poner en la torre.
      * @param h La altura requerida que debe alcanzar la torre.
@@ -109,7 +108,7 @@ public class TowerContest {
         }
         
         simulator.makeVisible();
-    }
+    } // Cierre del método
 
     /**
      * Calcula un subconjunto válido de números impares que sumen el valor objetivo.
@@ -159,7 +158,7 @@ public class TowerContest {
             }
         }
         return subset;
-    }
+    } // Cierre del método
 
     /**
      * Formatea la secuencia de tazas a la salida requerida por el problema.
@@ -175,7 +174,7 @@ public class TowerContest {
             result.add(String.valueOf(height));
         }
         return result.toString();
-    }
+    } // Cierre del método
 
     /**
      * Método principal para ejecutar y validar los casos de prueba de la competencia.
@@ -197,5 +196,5 @@ public class TowerContest {
             String result = contest.solve(n, h);
             System.out.println("n=" + n + ", h=" + h + " => " + result);
         }
-    }
-}
+    } // Cierre del método
+} // Cierre de la clase

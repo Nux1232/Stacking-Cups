@@ -2,8 +2,9 @@
  * Representa una taza dentro de la simulación.
  * Esta clase encapsula la lógica visual y dimensional de una taza individual.
  *
- * @author Juan Pablo Cuervo Contreras, David Felipe Ortiz Salcedo
- * @version 07/03/2026
+ * @author Juan Pablo Cuervo Contreras
+ * @author David Felipe Ortiz Salcedo
+ * @version 14/03/2026
  */
 
 public class Cup extends StackItem {
@@ -14,8 +15,8 @@ public class Cup extends StackItem {
      *
      * @param size El tamaño de la taza.
      * @param color El color visual de la taza.
-     * @param x     La coordenada X deseada.
-     * @param y     La coordenada Y deseada.
+     * @param x La coordenada X deseada.
+     * @param y La coordenada Y deseada.
      * @param creationId El id único de creación.
      */
     public Cup(int size, String color, int x, int y, int creationId) {
@@ -30,6 +31,7 @@ public class Cup extends StackItem {
         view.moveVertical(y - 15);
     } // Cierre del constructor
     
+    @Override
     /**
      * Obtiene la vista gráfica de la taza.
      * Este método permite a la clase controladora (Tower) gestionar la visibilidad.
@@ -40,6 +42,7 @@ public class Cup extends StackItem {
         return view;
     } // Cierre del método
     
+    @Override
     /**
      * Obtiene la altura de la taza en cm a partir de su tamaño.
      *
@@ -49,6 +52,7 @@ public class Cup extends StackItem {
         return size;
     } // Cierre del método
     
+    @Override
     /**
      * Dice de qué tipo es (en este caso una taza).
      * 
@@ -58,6 +62,7 @@ public class Cup extends StackItem {
         return "cup";
     } // Cierre del método
     
+    @Override
     /**
      * Hace que la taza se pueda visualizar.
      */
@@ -65,6 +70,7 @@ public class Cup extends StackItem {
         view.makeVisible();
     }
     
+    @Override
     /**
      * Hace que la taza se pueda visualizar.
      */

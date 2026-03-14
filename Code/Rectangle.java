@@ -12,7 +12,6 @@ import java.awt.*;
 public class Rectangle extends Figure {
 
     public static int EDGES = 4;
-
     private int height;
     private int width;
 
