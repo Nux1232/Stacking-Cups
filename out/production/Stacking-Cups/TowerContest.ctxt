@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=TowerContest
+comment0.text=\r\n\ Clase\ que\ resuelve\ y\ simula\ el\ problema\ de\ la\ marat\u00F3n.\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras\r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 09/03/2026\r\n
+comment1.params=n\ h
+comment1.target=java.lang.String\ solve(int,\ int)
+comment1.text=\r\n\ Resuelve\ el\ problema\ de\ la\ maraton.\r\n\r\n\ @param\ n\ Cantidad\ de\ tazas\ a\ poner\ en\ la\ torre.\r\n\ @param\ h\ La\ altura\ m\u00E1xima\ que\ puede\ tener\ la\ torre.\r\n\ @return\ String\ Las\ alturas\ de\ las\ tazas\ que\ se\ pueden\ colocar\ en\ la\ torre\ o\ si\ es\ imposible.\r\n
+numComments=2

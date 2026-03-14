@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Cup
+comment0.text=\n\ Representa\ una\ taza\ dentro\ de\ la\ simulaci\u00F3n.\n\ Esta\ clase\ encapsula\ la\ l\u00F3gica\ visual\ y\ dimensional\ de\ una\ taza\ individual.\n\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras,\ David\ Felipe\ Ortiz\ Salcedo\n\ @version\ 07/03/2026\n
+comment1.params=identifier\ color\ x\ y
+comment1.target=Cup(int,\ java.lang.String,\ int,\ int)
+comment1.text=\n\ Constructor\ de\ la\ clase\ Cup.\n\n\ @param\ i\ \ El\ identificador\ de\ la\ taza\ (Ejemplo\:\ 1,\ 2,\ 3...).\n\ @param\ color\ El\ color\ visual\ de\ la\ taza\ (Ejemplo\:\ "red",\ "blue").\n\ @param\ x\ \ \ \ \ La\ coordenada\ X\ deseada.\n\ @param\ y\ \ \ \ \ La\ coordenada\ Y\ deseada.\n
+comment2.params=
+comment2.target=Rectangle\ getView()
+comment2.text=\n\ Obtiene\ la\ vista\ gr\u00E1fica\ de\ la\ taza.\n\ Este\ m\u00E9todo\ permite\ a\ la\ clase\ controladora\ (Tower)\ gestionar\ la\ visibilidad.\n\n\ @return\ El\ objeto\ Rectangle\ que\ representa\ visualmente\ a\ la\ taza.\n
+comment3.params=
+comment3.target=int\ getHeight()
+comment3.text=\n\ Obtiene\ la\ altura\ de\ la\ taza\ en\ cm\ a\ partir\ de\ su\ identificador.\n\n\ @return\ La\ altura\ en\ cm.\n
+comment4.params=
+comment4.target=java.lang.String\ getType()
+comment4.text=\n\ Dice\ de\ qu\u00E9\ tipo\ es\ (en\ este\ caso\ una\ taza).\n\ \n\ @return\ String\ Qu\u00E9\ tipo\ de\ item\ es.\n
+comment5.params=
+comment5.target=void\ makeVisible()
+comment5.text=\n\ Hace\ que\ la\ taza\ se\ pueda\ visualizar.\n
+comment6.params=
+comment6.target=void\ makeInvisible()
+comment6.text=\n\ Hace\ que\ la\ taza\ se\ pueda\ visualizar.\n
+comment7.params=isCovered
+comment7.target=void\ setCoveredStatus(boolean)
+comment7.text=\n\ Cambia\ la\ apariencia\ de\ la\ taza\ para\ indicar\ que\ est\u00E1\ tapada.\n\ Cumple\ con\ el\ requisito\ de\ usabilidad\ de\ hacer\ que\ luzcan\ diferentes.\n
+numComments=8

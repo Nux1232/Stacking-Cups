@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Lid
+comment0.text=\n\ Representa\ una\ tapa\ que\ se\ coloca\ sobre\ las\ tazas\ en\ la\ simulaci\u00F3n.\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras,\ David\ Felipe\ Ortiz\ Salcedo\n\ @version\ 07/03/2026\n
+comment1.params=identifier\ color\ x\ y
+comment1.target=Lid(int,\ java.lang.String,\ int,\ int)
+comment1.text=\n\ Constructor\ de\ la\ clase\ Lid.\n\ \n\ @param\ i\ \ El\ identificador\ de\ la\ tapa.\n\ @param\ color\ El\ color\ de\ la\ tapa\ (debe\ coincidir\ con\ el\ de\ la\ taza).\n\ @param\ x\ \ \ \ \ La\ coordenada\ X\ deseada.\n\ @param\ y\ \ \ \ \ La\ coordenada\ Y\ deseada.\n
+comment2.params=
+comment2.target=Rectangle\ getView()
+comment2.text=\n\ Obtiene\ la\ vista\ gr\u00E1fica\ de\ la\ tapa.\n\n\ @return\ El\ objeto\ Rectangle\ que\ representa\ visualmente\ a\ la\ tapa.\n
+comment3.params=
+comment3.target=int\ getHeight()
+comment3.text=\n\ Retorna\ la\ altura\ de\ la\ tapa\ (debe\ ser\ 1cm).\n\ \n\ @return\ int\ La\ altura\ de\ la\ tapa.\n
+comment4.params=
+comment4.target=void\ makeVisible()
+comment4.text=\n\ Hace\ que\ la\ tapa\ se\ pueda\ visualizar.\n
+comment5.params=
+comment5.target=void\ makeInvisible()
+comment5.text=\n\ Hace\ que\ la\ tapa\ se\ pueda\ ver.\n
+comment6.params=
+comment6.target=java.lang.String\ getType()
+comment6.text=\n\ Dice\ de\ qu\u00E9\ tipo\ es\ el\ item\ (en\ este\ caso,\ una\ tapa).\n\ \n\ @return\ String\ Qu\u00E9\ tipo\ de\ item\ es.\n
+numComments=7
