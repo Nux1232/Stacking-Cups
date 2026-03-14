@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=TowerContestTest
-comment0.text=\r\n\ The\ test\ class\ TowerContestTest.\r\n\r\n\ @author\ \ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ The\ test\ class\ TowerContestTest.\r\n\ Pruebas\ unitarias\ para\ la\ clase\ TowerContest\ (2\ pruebas\ por\ cada\ m\u00E9todo).\r\n\r\n\ @author\ \ Juan\ Pablo\ Cuervo\ Contreras\ /\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 09/03/2026\r\n
 comment1.params=
 comment1.target=TowerContestTest()
 comment1.text=\r\n\ Default\ constructor\ for\ test\ class\ TowerContestTest\r\n
@@ -10,4 +10,22 @@ comment2.text=\r\n\ Sets\ up\ the\ test\ fixture.\r\n\r\n\ Called\ before\ every
 comment3.params=
 comment3.target=void\ tearDown()
 comment3.text=\r\n\ Tears\ down\ the\ test\ fixture.\r\n\r\n\ Called\ after\ every\ test\ case\ method.\r\n
-numComments=4
+comment4.params=
+comment4.target=void\ testSolveCasoValido()
+comment4.text=\r\n\ Prueba\ 1\ para\ el\ m\u00E9todo\ solve.\r\n\ Verifica\ que\ retorne\ la\ secuencia\ correcta\ de\ tazas\ para\ un\ caso\ v\u00E1lido\ (n\=4,\ h\=9).\r\n
+comment5.params=
+comment5.target=void\ testSolveCasoImposible()
+comment5.text=\r\n\ Prueba\ 2\ para\ el\ m\u00E9todo\ solve.\r\n\ Verifica\ que\ retorne\ 'impossible'\ para\ un\ caso\ donde\ la\ altura\ es\ inalcanzable\ (h\ mayor\ al\ m\u00E1ximo).\r\n
+comment6.params=
+comment6.target=void\ testSimulateCasoValido()
+comment6.text=\r\n\ Prueba\ 1\ para\ el\ m\u00E9todo\ simulate.\r\n\ Verifica\ que\ no\ lance\ excepciones\ al\ intentar\ simular\ gr\u00E1ficamente\ un\ caso\ v\u00E1lido.\r\n
+comment7.params=
+comment7.target=void\ testSimulateCasoImposible()
+comment7.text=\r\n\ Prueba\ 2\ para\ el\ m\u00E9todo\ simulate.\r\n\ Verifica\ que\ no\ lance\ excepciones\ al\ intentar\ simular\ un\ caso\ imposible.\r\n\ Nota\:\ En\ entorno\ gr\u00E1fico,\ esto\ desplegar\u00E1\ un\ JOptionPane,\ pero\ validamos\ que\ a\ nivel\ de\ c\u00F3digo\ no\ falle.\r\n
+comment8.params=
+comment8.target=void\ testMainEjecucionExitosa()
+comment8.text=\r\n\ Prueba\ 1\ para\ el\ m\u00E9todo\ main.\r\n\ Verifica\ que\ el\ m\u00E9todo\ principal\ se\ ejecute\ completamente\ sin\ lanzar\ errores.\r\n
+comment9.params=
+comment9.target=void\ testMainSalidaConsola()
+comment9.text=\r\n\ Prueba\ 2\ para\ el\ m\u00E9todo\ main.\r\n\ Verifica\ que\ la\ salida\ por\ consola\ (System.out)\ del\ m\u00E9todo\ main\ contenga\ los\ resultados\ esperados.\r\n
+numComments=10
