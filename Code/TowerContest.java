@@ -24,7 +24,7 @@ public class TowerContest {
      * @return Cadena de texto con las alturas de las tazas en el orden que deben colocarse, o "impossible" si no es posible.
      */
     public String solve(int n, int h) {
-        long targetH = h; // Casteo a long interno para evitar desbordamientos matemáticos con n grandes
+        long targetH = h;
         
         if(targetH < (2L * n - 1) || targetH > ((long)n * n)) {
             return "impossible";

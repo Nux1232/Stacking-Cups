@@ -5,12 +5,10 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Realiza casos de prueba para comprobar que el proyecto funciona.
- * Realiza casos de prueba para comprobar que el simulador funciona.
  *
  * @author Juan Pablo Cuervo Contreras
  * @author David Felipe Ortiz Salcedo
- * @version 1.0
- * @version 08/03/2026
+ * @version 15/03/2026
  */
 public class TowerC2Test {
     /**
@@ -40,6 +38,43 @@ public class TowerC2Test {
         newTower.pushCup(1);
         assertEquals(1, newTower.height());
     } // Cierre del caso de prueba
+    
+    //pushCup
+    /**
+     * Verifica que no se pueda agregar una taza duplicada a la torre.
+     */
+    @Test
+    public void shouldNotAddAnExistentCup() {
+        Tower newTower = new Tower(10, 40);
+        newTower.pushCup(23);
+        newTower.pushCup(23);
+        assertFalse(newTower.ok());
+    } // Cierre del caso de prueba
+    
+    //popCup
+    /**
+     * Verifica que no se pueda eliminar tazas si la torre no tiene.
+     */
+    @Test
+    public void shouldNotDeleteIfCupsDoesntExists() {
+        Tower newTower = new Tower(10, 40);
+        newTower.popCup();
+        assertFalse(newTower.ok());
+    } // Cierre del caso de prueba
+    
+    //removeCup
+    /**
+     * Verifica que la taza a la que se desee eliminar, la altura de la torre se reduzca.
+     */
+    @Test
+    public void shouldDecreaseHeight() {
+        Tower newTower = new Tower(10, 40);
+        int initialHeight = newTower.height();
+        newTower.pushCup(23);
+        newTower.removeCup(1);
+        int finalHeight = newTower.height();
+        assertEquals(initialHeight, finalHeight);
+    } // Cierre del caso de prueba
 
     // pushLid
     /**
@@ -55,6 +90,60 @@ public class TowerC2Test {
         assertEquals(1, finalHeight - initialHeight);
         assertEquals(1, newTower.height());
     } // Cierre del caso de prueba
+    
+    //popLid
+    /**
+     * Verifica que no se pueda eliminar tapas si la torre no tiene.
+     */
+    @Test
+    public void shouldNotDeleteLidIfDoesntExists() {
+        Tower newTower = new Tower(10, 40);
+        newTower.popLid();
+        assertFalse(newTower.ok());
+    } // Cierre del caso de prueba
+    
+    //removeLid
+    /**
+     * Verifica que no se pueda eliminar una tapa que ya ha sido eliminada anteriormente.
+     */
+    @Test
+    public void shouldNotDeleteTheSameLid() {
+        Tower newTower = new Tower(10, 40);
+        newTower.pushLid(3);
+        newTower.pushLid(5);
+        newTower.removeLid(2);
+        newTower.removeLid(2);
+        assertFalse(newTower.ok());
+    } // Cierre del caso de prueba
+    
+    //orderTower
+    /**
+     * Verifica que al tener tapa y taza con mismo tamaño, ordena la torre (la taza debe ir primero). 
+     */
+    @Test
+    public void shouldOrderIfLidAndCupHaveTheSameSize() {
+        Tower newTower = new Tower(10, 40);
+        newTower.pushCup(3);
+        newTower.pushLid(3);
+        newTower.orderTower();
+        assertTrue(newTower.ok());
+    } // Cierre del caso de prueba
+    
+    //reverseTower
+    /**
+     * Verifica que al realizar la reversa dos veces, las tazas y tapas estén en su posición original.
+     */
+    @Test
+    public void shouldStayInTheirOriginalPosition() {
+        Tower newTower = new Tower(10, 40);
+        newTower.pushCup(3);
+        newTower.pushLid(3);
+        newTower.pushCup(14);
+        newTower.pushLid(14);
+        newTower.reverseTower();
+        newTower.reverseTower();
+        assertTrue(newTower.ok());
+    } // Cierre del caso de prueba
 
     // swap
     /**
@@ -69,23 +158,45 @@ public class TowerC2Test {
         newTower.swap(o1, o2);
         assertFalse(newTower.ok());
     } // Cierre del caso de prueba
-
+    
+    // cover
     /**
-     * Verifica que al intercambiar taza y tapa, no aumente la altura.
-     * Verifica que no se pueda intercambiar con un objeto que no existe.
+     * Verifica que no se tapen dos o más tapas.
+     * Verifica que se pueda cubrir una taza con una tapa.
      */
     @Test
-    public void shouldNotSwapIfItemDoesNotExist() {
+    public void shouldCoverCupWithLid() {
         Tower newTower = new Tower(10, 40);
-        int initialHeight = newTower.height();
-        newTower.pushCup(25);
-        newTower.pushLid(15);
-        assertEquals(0, initialHeight);
-        newTower.pushLid(18);
-        String[] o1 = {"cup", "25"};
-        String[] o2 = {"lid", "35"};
-        newTower.swap(o1, o2);
+        newTower.pushCup(10);
+        newTower.pushLid(10);
+        newTower.pushLid(10);
         assertFalse(newTower.ok());
+        newTower.cover();
+        assertTrue(newTower.ok());
+    } // Cierre del caso de prueba
+    
+    //lidedCups
+    /**
+     * Verifica que se retorne una lista vacía de una taza al no existir.
+     */
+    @Test
+    public void shouldReturnEmptyListIfCupDoesntExists() {
+        Tower newTower = new Tower(10, 40);
+        int[] sinItem = newTower.lidedCups();
+        assertTrue(newTower.ok());
+    } // Cierre del caso de prueba
+    
+    //stackingItems
+    /**
+     * Verifica que no se retorne la matriz si los items no existen.
+     */
+    @Test
+    public void shouldReturnNothingIfItemsDoesntExists() {
+        Tower newTower = new Tower(10, 40);
+        newTower.pushCup(25);
+        newTower.pushLid(4);
+        String[][] sinItem = newTower.stackingItems();
+        assertTrue(newTower.ok());
     } // Cierre del caso de prueba
 
     //swapToReduce
@@ -104,22 +215,6 @@ public class TowerC2Test {
         
         String[][] move = newTower.swapToReduce();
         assertTrue(move == null || move.length == 2);
-    }
-
-    // cover
-    /**
-     * Verifica que no se tapen dos o más tapas.
-     * Verifica que se pueda cubrir una taza con una tapa.
-     */
-    @Test
-    public void shouldCoverCupWithLid() {
-        Tower newTower = new Tower(10, 40);
-        newTower.pushCup(10);
-        newTower.pushLid(10);
-        newTower.pushLid(10);
-        assertFalse(newTower.ok());
-        newTower.cover();
-        assertTrue(newTower.ok());
     } // Cierre del caso de prueba
 
     /**
@@ -128,4 +223,4 @@ public class TowerC2Test {
     @AfterEach
     public void tearDown() {
     } // Cierre del caso de prueba
-}
+} // Cierre de la clase
