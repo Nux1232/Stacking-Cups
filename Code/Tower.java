@@ -80,6 +80,7 @@ public class Tower {
             if(item.getType().equals("cup")) {
                 if (isVisible) item.makeInvisible();
                 items.remove(i);
+                if (isVisible) redraw();
                 lastOperationOk = true;
                 return;
             }
@@ -101,6 +102,7 @@ public class Tower {
                 if(item.getIdentifier() == id) {
                     if(isVisible) item.makeInvisible();
                     items.remove(n);
+                    if (isVisible) redraw();
                     lastOperationOk = true;
                     return;
                 }
@@ -153,6 +155,7 @@ public class Tower {
             if(item.getType().equals("lid")) {
                 if (isVisible) item.makeInvisible();
                 items.remove(i);
+                if (isVisible) redraw();
                 lastOperationOk = true;
                 return;
             }
@@ -174,6 +177,7 @@ public class Tower {
                 if(item.getIdentifier() == id) {
                     if(isVisible) item.makeInvisible();
                     items.remove(n);
+                    if (isVisible) redraw();
                     lastOperationOk = true;
                     return;
                 }
@@ -271,10 +275,7 @@ public class Tower {
     public void makeVisible() {
         isVisible = true;
         drawRuler();
-        for (StackItem item : items) {
-            if (item.getType().equals("cup")) item.getView().makeVisible();
-            if (item.getType().equals("lid")) item.getView().makeVisible();
-        }
+        redraw();
     } // Cierre del método
 
     /**
@@ -339,6 +340,7 @@ public class Tower {
             StackItem temp = items.get(index1);
             items.set(index1, items.get(index2));
             items.set(index2, temp);
+            if (isVisible) redraw();
             lastOperationOk = true;
         } else {
             showError("Uno o ambos objetos no existen en la torre.");
@@ -561,9 +563,9 @@ public class Tower {
      */
     private String[] identifyItem(Object item) {
         if (item instanceof Cup) {
-            return new String[] {"cup", String.valueOf(((Cup)item).getIdentifier())};
+            return new String[] {"cup", String.valueOf(((Cup)item).getSize())};
         } else if (item instanceof Lid) {
-            return new String[] {"lid", String.valueOf(((Lid)item).getIdentifier())};
+            return new String[] {"lid", String.valueOf(((Lid)item).getSize())};
         }
         return new String[] {"", ""}; // Caso por defecto de seguridad
     } // Cierre del método
@@ -571,12 +573,12 @@ public class Tower {
     /**
      * Método auxiliar privado para encontrar el índice de un objeto.
      */
-    private int findItemIndex(String type, int id) {
+    private int findItemIndex(String type, int size) {
         for (int i = 0; i < items.size(); i++) {
             StackItem item = items.get(i);
-            if (type.equalsIgnoreCase("cup") && item.getType().equals("cup") && ((Cup)item).getIdentifier() == id) {
+            if (type.equalsIgnoreCase("cup") && item.getType().equals("cup") && item.getSize() == size) {
                 return i;
-            } else if (type.equalsIgnoreCase("lid") && item.getType().equals("lid") && ((Lid)item).getIdentifier() == id) {
+            } else if (type.equalsIgnoreCase("lid") && item.getType().equals("lid") && item.getSize() == size) {
                 return i;
             }
         }

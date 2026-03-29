@@ -152,7 +152,7 @@ public class TowerC2Test {
     @Test
     public void shouldNotSwapBetweenIfItemsDoesntExists() {
         Tower newTower = new Tower(10, 40);
-        newTower.pushCup(3);
+        newTower.pushCup(3); 
         String[] o1 = {"cup", "3"};
         String[] o2 = {"lid", "5"};
         newTower.swap(o1, o2);
