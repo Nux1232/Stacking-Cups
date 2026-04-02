@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=NormalLid
+comment0.text=\r\n\ Clase\ hija\ que\ se\ comporta\ igual\ que\ la\ clase\ padre.\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras\r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 28/03/2026\r\n
+comment1.params=size\ color\ x\ y\ creationId
+comment1.target=NormalLid(int,\ java.lang.String,\ int,\ int,\ int)
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ NormalLid.\r\n\ \r\n\ @param\ size\ El\ tama\u00F1o\ de\ la\ tapa\ (debe\ coincidir\ con\ el\ de\ la\ taza).\r\n\ @param\ color\ El\ color\ de\ la\ tapa.\r\n\ @param\ x\ \ \ \ \ La\ coordenada\ X\ deseada.\r\n\ @param\ y\ \ \ \ \ La\ coordenada\ Y\ deseada.\r\n\ @param\ creationId\ El\ identificador\ de\ orden\ de\ creaci\u00F3n.\r\n
+comment2.params=items
+comment2.target=boolean\ lidCanEnter(java.util.ArrayList)
+comment2.text=\r\n\ M\u00E9todo\ que\ verifica\ si\ una\ tapa\ normal\ puede\ entrar\ a\ la\ torre.\r\n\ \r\n\ @param\ items\ La\ lista\ que\ contiene\ tazas\ y\ tapas.\r\n\ @return\ boolean\ Retorna\ true\ si\ puede\ entrar\ la\ tapa\ normal\ o\ false\ si\ no.\r\n
+comment3.params=items\ index
+comment3.target=boolean\ lidCanExit(java.util.ArrayList,\ int)
+comment3.text=\r\n\ M\u00E9todo\ que\ verifica\ si\ una\ tapa\ normal\ puede\ salir\ de\ la\ torre.\r\n\ \r\n\ @param\ items\ La\ lista\ que\ contiene\ tazas\ y\ tapas.\r\n\ @return\ boolean\ Retorna\ true\ si\ la\ tapa\ normal\ puede\ salir\ o\ false\ si\ no.\r\n
+comment4.params=items
+comment4.target=void\ actionPush(java.util.ArrayList)
+comment4.text=\r\n\ M\u00E9todo\ que\ agrega\ la\ tapa\ de\ acuerdo\ a\ su\ comportamiento.\r\n\ En\ este\ caso\ no\ hace\ nada.\r\n\ \r\n\ @param\ items\ La\ lista\ que\ contiene\ tazas\ y\ tapas.\r\n
+numComments=5

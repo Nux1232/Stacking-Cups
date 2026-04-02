@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=TowerATest
+comment0.text=\r\n\ Clase\ de\ prueba\ que\ tiene\ como\ objetivo\ verificar\ que\ el\ proyecto\ completo\ funcione\r\n\ correctamente.\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras\r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 30/03/2026\r\n
+comment1.params=
+comment1.target=void\ setUp()
+comment1.text=\r\n\ M\u00E9todo\ llamado\ antes\ de\ cada\ caso\ de\ prueba.\r\n
+comment2.params=
+comment2.target=void\ shouldNotAddTwoSameCups()
+comment2.text=\r\n\ Caso\ de\ prueba\ que\ verifica\ que\ no\ se\ puedan\ agregar\ dos\ tazas\ del\ mismo\ tama\u00F1o\r\n\ sin\ importar\ que\ tipo\ de\ taza\ sea.\r\n
+comment3.params=
+comment3.target=void\ tearDown()
+comment3.text=\r\n\ M\u00E9todo\ llamado\ despu\u00E9s\ de\ cada\ caso\ de\ prueba.\r\n
+numComments=4

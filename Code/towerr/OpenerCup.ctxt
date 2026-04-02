@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=OpenerCup
+comment0.text=\r\n\ Clase\ hija\ que\ elimina\ las\ tapas\ que\ le\ impidan\ el\ paso\ al\ ser\ colocada\ en\ la\ torre.\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Conteras\r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 28/03/2026\r\n
+comment1.params=size\ color\ x\ y\ creationId
+comment1.target=OpenerCup(int,\ java.lang.String,\ int,\ int,\ int)
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ OpenerCup.\r\n\ \r\n\ @param\ size\ El\ tama\u00F1o\ de\ la\ taza\ opener.\r\n\ @param\ color\ El\ color\ visual\ de\ la\ taza\ opener.\r\n\ @param\ x\ La\ coordenada\ X\ deseada.\r\n\ @param\ y\ La\ coordenada\ Y\ deseada.\r\n\ @param\ creationId\ El\ id\ \u00FAnico\ de\ creaci\u00F3n.\r\n
+comment2.params=items
+comment2.target=void\ actionPush(java.util.ArrayList)
+comment2.text=\r\n\ M\u00E9todo\ abstracto\ que\ tiene\ como\ fin\ definir\ el\ comportamiento\ de\ una\ taza\ opener.\r\n\ Si\ la\ taza\ opener\ encuentra\ una\ tapa,\ entonces\ la\ elimina\ hasta\r\n\ encontrar\ una\ taza\ cualquiera.\r\n\ \r\n\ @param\ items\ La\ lista\ que\ contiene\ un\ item.\r\n
+numComments=3

@@ -1,0 +1,31 @@
+#BlueJ class context
+comment0.target=TowerContestTest
+comment0.text=\r\n\ Pruebas\ unitarias\ para\ la\ clase\ TowerContest\ (2\ pruebas\ por\ cada\ m\u00E9todo).\r\n\r\n\ @author\ Juan\ Pablo\ Cuervo\ Contreras\ \r\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\r\n\ @version\ 15/03/2026\r\n
+comment1.params=
+comment1.target=void\ setUp()
+comment1.text=\r\n\r\n\ M\u00E9todo\ llamado\ antes\ de\ los\ casos\ de\ prueba.\r\n
+comment2.params=
+comment2.target=void\ shouldSolveAValidCase()
+comment2.text=\r\n\ Verifica\ que\ retorne\ la\ secuencia\ correcta\ de\ tazas\ para\ un\ caso\ v\u00E1lido.\ Ejemplo\:\ n\ \=\ 4\ y\ h\ \=\ 9\r\n
+comment3.params=
+comment3.target=void\ shouldReturnImpossible()
+comment3.text=\r\n\ Verifica\ que\ retorne\ 'impossible'\ donde\ excede\ la\ altura\ de\ la\ torre.\r\n
+comment4.params=
+comment4.target=void\ shouldNotThrowExceptionAtAValidCase()
+comment4.text=\r\n\ Verifica\ que\ no\ lance\ excepciones\ al\ intentar\ simular\ gr\u00E1ficamente\ un\ caso\ v\u00E1lido.\r\n
+comment5.params=
+comment5.target=void\ shouldThrowExceptionIfImpossible()
+comment5.text=\r\n\ Verifica\ que\ no\ lance\ excepciones\ al\ intentar\ simular\ un\ caso\ imposible.\r\n
+comment6.params=
+comment6.target=void\ shouldExecuteNormally()
+comment6.text=\r\n\ Verifica\ que\ el\ m\u00E9todo\ principal\ se\ ejecute\ normal.\r\n
+comment7.params=
+comment7.target=void\ shouldReturnExpectedAnswer()
+comment7.text=\r\n\ Verifica\ que\ la\ salida\ por\ consola\ tenga\ los\ resultados\ esperados.\r\n
+comment8.params=args
+comment8.target=void\ main(java.lang.String[])
+comment8.text=\r\n\ M\u00E9todo\ principal\ para\ ejecutar\ y\ validar\ los\ casos\ de\ prueba\ de\ la\ competencia.\r\n\ \r\n\ @param\ args\ Argumentos\ de\ la\ l\u00EDnea\ de\ comandos.\r\n
+comment9.params=
+comment9.target=void\ tearDown()
+comment9.text=\r\n\r\n\ M\u00E9todo\ llamado\ despu\u00E9s\ de\ los\ casos\ de\ prueba.\r\n
+numComments=10
