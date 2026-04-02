@@ -102,6 +102,18 @@ public class TowerC4Test {
         assertEquals("lid", newTower.stackingItems()[0][0]);
     } // Cierre del caso de prueba
     
+    // HeavyCup
+    /**
+     * Caso de prueba que comprueba que una HeavyCup no pueda ser eliminada
+     * debido a que simula siempre haber llegado a la base.
+     */
+    @Test
+    public void shouldNotPopHeavyCup() {
+        newTower.pushCup("heavy", 1);
+        newTower.popCup();
+        assertFalse(newTower.ok());
+    } // Cierre del caso de prueba
+
     /**
      * Método llamado después de cada caso de prueba.     
     */
