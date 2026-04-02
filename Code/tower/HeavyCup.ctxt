@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=HeavyCup
+comment0.text=\n\ Clase\ hija\ que\ no\ puede\ ser\ removida\ de\ la\ torre\ una\ vez\ que\ entra.\n\n\ @author\ Juan\ Pablo\ Cuervo\ Conteras\n\ @author\ David\ Felipe\ Ortiz\ Salcedo\n\ @version\ 01/04/2026\n
+comment1.params=size\ color\ x\ y\ creationId
+comment1.target=HeavyCup(int,\ java.lang.String,\ int,\ int,\ int)
+comment1.text=\n\ Constructor\ de\ la\ clase\ HeavyCup.\n\ \n\ @param\ size\ El\ tama\u00F1o\ de\ la\ taza\ heavy.\n\ @param\ color\ El\ color\ visual\ de\ la\ taza\ heavy.\n\ @param\ x\ La\ coordenada\ X\ deseada.\n\ @param\ y\ La\ coordenada\ Y\ deseada.\n\ @param\ creationId\ El\ id\ \u00FAnico\ de\ creaci\u00F3n.\n
+comment2.params=items
+comment2.target=void\ actionPush(java.util.ArrayList)
+comment2.text=\n\ M\u00E9todo\ abstracto\ que\ tiene\ como\ fin\ definir\ el\ comportamiento\ de\ una\ taza\ heavy.\n\ Act\u00FAa\ como\ una\ taza\ normal\ al\ entrar.\n\ \n\ @param\ items\ La\ lista\ que\ contiene\ un\ item.\n
+comment3.params=
+comment3.target=boolean\ hasReachedBase()
+comment3.text=\n\ M\u00E9todo\ que\ hace\ que\ la\ taza\ pesada\ no\ pueda\ ser\ eliminada.\n\ Enga\u00F1a\ al\ simulador\ diciendo\ que\ siempre\ ha\ alcanzado\ la\ base.\n
+numComments=4

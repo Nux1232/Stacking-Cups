@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Figure
-comment0.text=\r\n\ Clase\ padre\ abstracta\ que\ agrupa\ los\ comportamientos\ comunes\ de\ las\ figuras.\r\n
+comment0.text=\n\ Clase\ padre\ abstracta\ que\ agrupa\ los\ comportamientos\ comunes\ de\ las\ figuras.\n
 comment1.params=xPosition\ yPosition\ color
 comment1.target=Figure(int,\ int,\ java.lang.String)
 comment10.params=newX\ newY
@@ -13,10 +13,10 @@ comment13.params=newColor
 comment13.target=void\ changeColor(java.lang.String)
 comment14.params=
 comment14.target=void\ erase()
-comment14.text=\r\n\ Borra\ la\ figura\ de\ la\ pantalla.\ Como\ la\ l\u00F3gica\ es\ igual\ para\ todas,\r\n\ se\ implementa\ directamente\ en\ la\ clase\ padre.\r\n
+comment14.text=\n\ Borra\ la\ figura\ de\ la\ pantalla.\ Como\ la\ l\u00F3gica\ es\ igual\ para\ todas,\n\ se\ implementa\ directamente\ en\ la\ clase\ padre.\n
 comment15.params=
 comment15.target=void\ draw()
-comment15.text=\r\n\ Dibuja\ la\ figura.\ Cada\ figura\ hija\ debe\ definir\ C\u00D3MO\ dibujarse\ a\ s\u00ED\ misma.\r\n
+comment15.text=\n\ Dibuja\ la\ figura.\ Cada\ figura\ hija\ debe\ definir\ C\u00D3MO\ dibujarse\ a\ s\u00ED\ misma.\n
 comment2.params=
 comment2.target=void\ makeVisible()
 comment3.params=
